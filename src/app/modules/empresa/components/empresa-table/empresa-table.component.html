@@ -12,14 +12,6 @@
           (click)="handleShowAllEmpresas()"
         ></p-button>
 
-        <p-button
-          styleClass="p-button-outlined"
-          class="p-button-outlined "
-          pTooltip="Minhas empresas"
-          tooltipPosition="top"
-          label='Minhas empresas'
-          (click)="handleProfissionalPacients()"
-        ></p-button>
       </div>
       <hr style="border: 1px solid #ccc; width: 100%; margin-bottom: 20px;">
 
@@ -61,20 +53,9 @@
             <th pSortableColumn="referrals">
               <div class='flex justify-content-between align-items-center'>
                 <div class="flex justify-content-between align-items-center">
-                  Encaminhado para
+                  CNPJ
                 </div>
-                <div class='justify-content-between align-items-center'>
-                  <p-sortIcon field='referrals'></p-sortIcon>
-                  <p-columnFilter
-                    type="text"
-                    field='referrals'
-                    display="menu"
-                    matchMode="contains"
-                    [showMatchModes]='false'
-                    [showAddButton]="false"
-                    [showOperator]="false"
-                  ></p-columnFilter>
-                </div>
+
               </div>
             </th>
 

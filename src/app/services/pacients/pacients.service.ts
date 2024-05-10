@@ -4,7 +4,7 @@ import {CookieService} from "ngx-cookie-service";
 import {environments} from "../../../environments/environments";
 import {Observable, tap} from "rxjs";
 import {
-  AddPacientRequest,
+  AddEmpresaRequest,
   EditPacientRequest, GetEmpresaResponse,
   GetPacientsResponse, SendMedicalSpecialityRequest,
 
@@ -64,10 +64,10 @@ export class PacientService {
     );
   }
 
-  createPacient(requestData : AddPacientRequest): Observable<Array<GetPacientsResponse>> {
+  createPacient(userId: 1, requestData : AddEmpresaRequest): Observable<Array<GetEmpresaResponse>> {
       console.log('Request:', requestData)
-    return this.http.post<Array<GetPacientsResponse>>(
-      `${this.API_URL}/api/Pacient/create-pacient`,
+    return this.http.post<Array<GetEmpresaResponse>>(
+      `${this.API_URL}/api/Empresa/create-empresa/${userId}`,
       requestData,
       this.httpOptions
     );

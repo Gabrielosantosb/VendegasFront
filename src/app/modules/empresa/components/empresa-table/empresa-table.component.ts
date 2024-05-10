@@ -89,8 +89,4 @@ export class EmpresaTableComponent implements OnInit{
     });
   }
 
-  onDropdownChange(event: any) {
-    const selectedSpeciality = event.value;
-    this.showOtherField = selectedSpeciality === 'Outra';
-  }
 }

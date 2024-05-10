@@ -9,7 +9,8 @@ import {ConfirmationModal} from "../../../../../services/confirmation/confirmati
 import {PacientService} from "../../../../../services/pacients/pacients.service";
 import {ProgressBar, ProgressBarModule} from "primeng/progressbar";
 import {
-  AddPacientRequest, EditPacientRequest,
+  AddEmpresaRequest,
+  EditPacientRequest,
   GetPacientsResponse
 } from "../../../../../../models/interfaces/pacients/get-pacient-service.service";
 
@@ -84,32 +85,32 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
 
 
   handleSubmitEmpresaAction(): void {
-    if (this.empresaAction?.event?.action === this.addEmpresaAction) this.handleSubmitAddPacient();
+    if (this.empresaAction?.event?.action === this.addEmpresaAction) this.handleSubmitAddEmpresa();
     if (this.empresaAction?.event?.action === this.editPacientAction) this.handleSubmitEditPacient();
     return;
   }
 
 
-  handleSubmitAddPacient(): void {
+  handleSubmitAddEmpresa(): void {
     if (this.empresaForm?.value && this.empresaForm?.valid) {
       this.isLoading = true
 
-      const requestCreatePacient = this.empresaForm.value as AddPacientRequest;
+      const requestCreateEmpresa = this.empresaForm.value as AddEmpresaRequest;
       this.empresaService
-        .createPacient(requestCreatePacient)
+        .createPacient(1, requestCreateEmpresa)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response:any) => {
             if (response) {
               this.empresaForm.reset();
-              this.toastMessage.SuccessMessage('Paciente criado com sucesso!')
+              this.toastMessage.SuccessMessage('Empresa criada com sucesso!')
               this.isLoading = false
             }
           },
           error: (err: Error) => {
             console.log(err);
             this.empresaForm.reset();
-            this.toastMessage.ErrorMessage('Erro ao criar Paciente!')
+            this.toastMessage.ErrorMessage('Erro ao criar empresa!')
           },
         });
     }
