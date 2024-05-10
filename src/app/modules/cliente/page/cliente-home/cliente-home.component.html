@@ -1,0 +1,8 @@
+<app-toolbar-navigation></app-toolbar-navigation>
+
+<app-cliente-table
+  [reports]="reportData"
+  (reportEvent)="handleReportAction($event)"
+  (deleteReportEvent)="handleDeleteReportAction($event)"
+></app-cliente-table>
+
