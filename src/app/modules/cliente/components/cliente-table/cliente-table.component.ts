@@ -47,7 +47,7 @@ export class ClienteTableComponent {
     this.selectedCliente = report;
     this.displayModal = true;
   }
-  handleDeleteReport(reportId: number, pacientName: string): void {
+  handleDeleteCliente(reportId: number, pacientName: string): void {
     if(reportId !== null && pacientName !== "")
     {
       this.deleteReportEvent.emit({

@@ -118,11 +118,11 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
         .subscribe({
           next: () => {
               this.getAllClientes()
-              this.toastMessage.SuccessMessage('Ficha removida com sucesso!')
+              this.toastMessage.SuccessMessage('Cliente removido com sucesso!')
           },
           error: (err) => {
             console.log(err);
-            this.toastMessage.ErrorMessage('Erro ao remover ficha!')
+            this.toastMessage.ErrorMessage('Erro ao remover cliente!')
           },
         });
     }

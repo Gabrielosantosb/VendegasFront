@@ -60,20 +60,11 @@
                 <button
                   pButton
                   pRipple
-                  pTooltip='Excluir Ficha'
+                  pTooltip='Excluir cliente'
                   tooltipPosition="top"
                   icon='pi pi-trash'
                   class="p-button-outlined p-button-danger"
-                  (click)="handleDeleteReport(cliente?.reportId, cliente?.pacientName)"
-                ></button>
-                <button
-                  pButton
-                  pRipple
-                  pTooltip='Visualizar Ficha'
-                  tooltipPosition="top"
-                  icon='pi pi-eye'
-                  class="p-button-outlined p-button-info"
-                  (click)="openReportDetails(cliente)"
+                  (click)="handleDeleteCliente(cliente?.clienteId, cliente?.clienteName)"
                 ></button>
               </div>
             </td>
@@ -81,7 +72,7 @@
         </ng-template>
       </p-table>
       <ng-template #noReports>
-        <div class="text-center">Nenhuma ficha encontrada.</div>
+        <div class="text-center">Nenhum cliente encontrada.</div>
       </ng-template>
     </p-card>
   </div>
