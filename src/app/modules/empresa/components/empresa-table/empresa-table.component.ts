@@ -5,9 +5,8 @@ import {
 } from "../../../../../models/interfaces/pacients/get-pacient-service.service";
 import {EditEmpresaAction} from "../../../../../models/interfaces/pacients/event/editPacient";
 import {EmpresaEvent} from "../../../../../models/interfaces/enums/pacients/PacientEvent";
-import {DeletePacient} from "../../../../../models/interfaces/pacients/event/deletePacient";
 import {PacientService} from "../../../../services/pacients/pacients.service";
-import {EditReportAction} from "../../../../../models/interfaces/reports/event/EditReportAction";
+import {EditClienteAction} from "../../../../../models/interfaces/reports/event/EditReportAction";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ReferralService} from "../../../../services/referral/referral.service";
 
@@ -21,7 +20,7 @@ export class EmpresaTableComponent implements OnInit{
   @Input() public empresa: Array<GetEmpresaResponse> = [];
   @Output() public empresaEvent = new EventEmitter<EditEmpresaAction>();
 
-  @Output() public reportEvent = new EventEmitter<EditReportAction>();
+  @Output() public reportEvent = new EventEmitter<EditClienteAction>();
   public empresaSelected!: GetEmpresaResponse;
   public addEmpresaAction = EmpresaEvent.ADD_EMPRESA_ACTION;
   public editPacientAction = EmpresaEvent.EDIT_EMPRESA_ACTION;
@@ -29,7 +28,7 @@ export class EmpresaTableComponent implements OnInit{
 
 
 
-  constructor(private pacientService: PacientService, private toastMessage: ToastMessage, private referralService: ReferralService) {
+  constructor(private empresaService: PacientService, private toastMessage: ToastMessage, private referralService: ReferralService) {
   }
 
   ngOnInit(): void {
@@ -48,7 +47,7 @@ export class EmpresaTableComponent implements OnInit{
 
 
   handleShowAllEmpresas(): void {
-    this.pacientService.getAllEmpresas().subscribe({
+    this.empresaService.getAllEmpresas().subscribe({
       next: (allEmpresaData) => {
         console.log('Aqui as empresas: ', allEmpresaData)
         this.empresa = allEmpresaData;

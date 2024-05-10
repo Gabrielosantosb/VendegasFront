@@ -8,7 +8,7 @@ import {ProgressBarModule} from "primeng/progressbar";
 import {ConfirmationModal} from "../../../../services/confirmation/confirmation-service.service";
 import {ReportsService} from "../../../../services/reports/reports.service";
 import {ReportEvent} from "../../../../../models/interfaces/enums/report/ReportEvent.js";
-import {EditReportAction} from "../../../../../models/interfaces/reports/event/EditReportAction";
+import {EditClienteAction} from "../../../../../models/interfaces/reports/event/EditReportAction";
 import {
   GetReportResponse,
   ReportRequest
@@ -30,7 +30,7 @@ export class ReportFormComponent implements OnInit, OnDestroy {
 
   public addReportAction = ReportEvent.ADD_REPORT_EVENT;
   public editReportAction = ReportEvent.EDIT_REPORT_EVENT;
-  public reportAction !: { event: EditReportAction }
+  public reportAction !: { event: EditClienteAction }
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
   reportId = 0;
   pacientId = 0

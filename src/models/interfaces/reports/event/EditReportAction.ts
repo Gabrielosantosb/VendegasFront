@@ -1,6 +1,6 @@
-export interface EditReportAction{
+export interface EditClienteAction{
   action: string
   id?: number
-  pacientName?: string
+  clienteName?: string
 
 }
