@@ -2,7 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PacientService} from "../../../../services/pacients/pacients.service";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {Subject, takeUntil} from "rxjs";
-import {GetPacientsResponse} from "../../../../../models/interfaces/pacients/get-pacient-service.service";
+import {
+  GetEmpresaResponse,
+  GetPacientsResponse
+} from "../../../../../models/interfaces/pacients/get-pacient-service.service";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {Router} from "@angular/router";
 import {ConfirmationModal} from "../../../../services/confirmation/confirmation-service.service";
@@ -24,11 +27,10 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
   private ref!: DynamicDialogRef;
   isLoading = false
   loadingMode: ProgressBarModule = 'indeterminate';
-  public pacientsData: Array<GetPacientsResponse> = [];
-  public productsData = []
+  public empresasData: Array<GetEmpresaResponse> = [];
 
   constructor(
-    private pacientSerivce: PacientService,
+    private empresaService: PacientService,
     private dialogService: DialogService,
     private toastMessage: ToastMessage,
     private confirmationModal: ConfirmationModal,
@@ -41,15 +43,15 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
   }
 
 
-  getAllPacients() {
+  getAllEmpresas() {
     this.isLoading = true
-    this.pacientSerivce
-      .getAllPacients()
+    this.empresaService
+      .getAllEmpresas()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (response : GetPacientsResponse[]) => {
+        next: (response : GetEmpresaResponse[]) => {
           if (response.length > 0) {
-            this.pacientsData = response;
+            this.empresasData = response;
             this.isLoading = false
           }
         },
@@ -73,22 +75,22 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
 
   deletePacient(pacient_id: number): void {
     if (pacient_id) {
-      this.pacientSerivce
+      this.empresaService
         .deletePacient({pacient_id})
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: () => {
-            this.getAllPacients();
+            this.getAllEmpresas();
             this.toastMessage.SuccessMessage('Paciente  removida com sucesso!')
           },
           error: (err: string) => {
             console.log(err);
-            this.getAllPacients();
+            this.getAllEmpresas();
             this.toastMessage.ErrorMessage('Erro ao remover paciente !')
           },
         });
 
-      this.getAllPacients();
+      this.getAllEmpresas();
     }
   }
 
@@ -110,7 +112,7 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
       });
 
       this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
-        next: () => this.getAllPacients(),
+        next: () => this.getAllEmpresas(),
       });
     }
   }
@@ -128,7 +130,7 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
       });
 
       this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
-        next: () => this.getAllPacients(),
+        next: () => this.getAllEmpresas(),
       });
     }
   }

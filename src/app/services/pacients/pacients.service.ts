@@ -28,12 +28,6 @@ export class PacientService {
   constructor(private http: HttpClient, private cookie: CookieService) {}
 
 
-  getAllPacients(): Observable<Array<GetPacientsResponse>> {
-    return this.http.get<Array<GetPacientsResponse>>(
-      `${this.API_URL}/api/Pacient/get-pacients`,
-      this.httpOptions
-    )
-  }
 
   getAllEmpresas(): Observable<Array<GetEmpresaResponse>> {
     return this.http.get<Array<GetEmpresaResponse>>(
@@ -64,7 +58,7 @@ export class PacientService {
     );
   }
 
-  createPacient(userId: 1, requestData : AddEmpresaRequest): Observable<Array<GetEmpresaResponse>> {
+  createEmpresa(userId: 1, requestData : AddEmpresaRequest): Observable<Array<GetEmpresaResponse>> {
       console.log('Request:', requestData)
     return this.http.post<Array<GetEmpresaResponse>>(
       `${this.API_URL}/api/Empresa/create-empresa/${userId}`,

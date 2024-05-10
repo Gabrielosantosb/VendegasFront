@@ -97,7 +97,7 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
 
       const requestCreateEmpresa = this.empresaForm.value as AddEmpresaRequest;
       this.empresaService
-        .createPacient(1, requestCreateEmpresa)
+        .createEmpresa(1, requestCreateEmpresa)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response:any) => {

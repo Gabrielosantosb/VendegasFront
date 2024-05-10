@@ -30,7 +30,6 @@ export class EmpresaTableComponent implements OnInit{
   public empresaSelected!: GetEmpresaResponse;
   public addPacientAction = EmpresaEvent.ADD_EMPRESA_ACTION;
   public editPacientAction = EmpresaEvent.EDIT_EMPRESA_ACTION;
-  selectedProfissional: any;
   displayModal: boolean = false;
   showProfissionalPacients = false
   showOtherField: boolean = false;
