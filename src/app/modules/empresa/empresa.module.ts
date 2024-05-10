@@ -35,30 +35,30 @@ import {EmpresaTableComponent} from "./components/empresa-table/empresa-table.co
     EmpresaTableComponent,
     EmpresaFormComponent
   ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(CATEGORIES_ROTES),
-        SharedModule,
-        HttpClientModule,
-        // -----PrimeNG------
-        CardModule,
-        ButtonModule,
-        TableModule,
-        InputMaskModule,
-        InputSwitchModule,
-        InputTextareaModule,
-        DynamicDialogModule,
-        DropdownModule,
-        RippleModule,
-        ConfirmDialogModule,
-        InputTextModule,
-        TooltipModule,
-        ProgressBarModule,
-        CheckboxModule,
-        DialogModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(CATEGORIES_ROTES),
+    HttpClientModule,
+    // -----PrimeNG------
+    CardModule,
+    ButtonModule,
+    TableModule,
+    InputMaskModule,
+    InputSwitchModule,
+    InputTextareaModule,
+    DynamicDialogModule,
+    DropdownModule,
+    RippleModule,
+    ConfirmDialogModule,
+    InputTextModule,
+    TooltipModule,
+    ProgressBarModule,
+    CheckboxModule,
+    DialogModule,
+    SharedModule
+  ],
   providers : [DialogService, ConfirmationService]
 })
 export class EmpresaModule { }

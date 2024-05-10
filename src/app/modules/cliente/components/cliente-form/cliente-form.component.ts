@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
-import {PacientService} from "../../../../services/pacients/pacients.service";
+import {EmpresaService} from "../../../../services/empresa/empresa.service";
 import { FormBuilder, Validators} from "@angular/forms";
 import {DynamicDialogConfig} from "primeng/dynamicdialog";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
@@ -48,7 +48,7 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
   constructor(
     public ref: DynamicDialogConfig,
     private formBuilder: FormBuilder,
-    private pacientService: PacientService,
+    private empresaService: EmpresaService,
     private clienteService: ReportsService,
     private confirmationModal: ConfirmationModal,
     private toastMessage: ToastMessage,

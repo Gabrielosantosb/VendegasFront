@@ -6,7 +6,7 @@ import {EmpresaEvent} from "../../../../../../models/interfaces/enums/pacients/P
 import {EditEmpresaAction} from "../../../../../../models/interfaces/pacients/event/editPacient";
 import {ToastMessage} from "../../../../../services/toast-message/toast-message";
 import {ConfirmationModal} from "../../../../../services/confirmation/confirmation-service.service";
-import {PacientService} from "../../../../../services/pacients/pacients.service";
+import {EmpresaService} from "../../../../../services/empresa/empresa.service";
 import {ProgressBar, ProgressBarModule} from "primeng/progressbar";
 import {
   AddEmpresaRequest,
@@ -41,7 +41,7 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
   constructor(
     public ref: DynamicDialogConfig,
     private formBuilder: FormBuilder,
-    private empresaService: PacientService,
+    private empresaService: EmpresaService,
     private confirmationModal: ConfirmationModal,
     private toastMessage: ToastMessage
   ) {}

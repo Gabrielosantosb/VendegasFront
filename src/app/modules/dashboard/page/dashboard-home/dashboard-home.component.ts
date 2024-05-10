@@ -3,7 +3,7 @@ import {MessageService} from 'primeng/api';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {ChartData, ChartOptions} from 'chart.js';
-import {PacientService} from '../../../../services/pacients/pacients.service';
+import {EmpresaService} from '../../../../services/empresa/empresa.service';
 import {ReportsService} from "../../../../services/reports/reports.service";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ReferralService} from "../../../../services/referral/referral.service";
@@ -30,7 +30,7 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private pacientService: PacientService,
+    private pacientService: EmpresaService,
     private reportService: ReportsService,
     private userService: UserService,
     private messageService: MessageService,

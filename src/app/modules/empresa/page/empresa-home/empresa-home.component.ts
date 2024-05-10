@@ -1,18 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PacientService} from "../../../../services/pacients/pacients.service";
+import {EmpresaService} from "../../../../services/empresa/empresa.service";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {Subject, takeUntil} from "rxjs";
 import {
   GetEmpresaResponse,
-  GetPacientsResponse
+
 } from "../../../../../models/interfaces/pacients/get-pacient-service.service";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {Router} from "@angular/router";
 import {ConfirmationModal} from "../../../../services/confirmation/confirmation-service.service";
 import {EventAction} from "../../../../../models/interfaces/reports/event/EventAction";
 import {EmpresaFormComponent} from "../../components/empresa-form/empresa-form/empresa-form.component";
-import {ReportsDataTransferService} from "../../../../shared/reports/reports-data-transfer.service";
-import {DeletePacient} from "../../../../../models/interfaces/pacients/event/deletePacient";
+
 import {ProgressBarModule} from "primeng/progressbar";
 import {ClienteFormComponent} from "../../../cliente/components/cliente-form/cliente-form.component";
 
@@ -30,7 +29,7 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
   public empresasData: Array<GetEmpresaResponse> = [];
 
   constructor(
-    private empresaService: PacientService,
+    private empresaService: EmpresaService,
     private dialogService: DialogService,
     private toastMessage: ToastMessage,
     private confirmationModal: ConfirmationModal,

@@ -30,29 +30,29 @@ import {SharedModule} from "../../shared/shared.module";
     ClienteHomeComponent,
     ClienteTableComponent
   ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        SharedModule,
-        HttpClientModule,
-        RouterModule.forChild(CLIENTE_ROUTES),
-        // PrimeNG
-        CardModule,
-        ButtonModule,
-        TableModule,
-        InputMaskModule,
-        InputSwitchModule,
-        InputTextModule,
-        InputTextareaModule,
-        InputNumberModule,
-        DynamicDialogModule,
-        DropdownModule,
-        ConfirmDialogModule,
-        TooltipModule,
-        RippleModule,
-        DialogModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forChild(CLIENTE_ROUTES),
+    // PrimeNG
+    CardModule,
+    ButtonModule,
+    TableModule,
+    InputMaskModule,
+    InputSwitchModule,
+    InputTextModule,
+    InputTextareaModule,
+    InputNumberModule,
+    DynamicDialogModule,
+    DropdownModule,
+    ConfirmDialogModule,
+    TooltipModule,
+    RippleModule,
+    DialogModule,
+    SharedModule
+  ],
   providers:[DialogService, ConfirmationService]
 })
 export class ClienteModule { }

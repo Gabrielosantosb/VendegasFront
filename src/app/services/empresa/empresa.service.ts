@@ -14,7 +14,7 @@ import {FormGroup} from "@angular/forms";
 @Injectable({
   providedIn: 'root'
 })
-export class PacientService {
+export class EmpresaService {
   private API_URL = environments.API_URL;
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
   private token = this.cookie.get(this.USER_AUTH)

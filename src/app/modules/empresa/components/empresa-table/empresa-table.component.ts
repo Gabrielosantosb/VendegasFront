@@ -5,7 +5,7 @@ import {
 } from "../../../../../models/interfaces/pacients/get-pacient-service.service";
 import {EditEmpresaAction} from "../../../../../models/interfaces/pacients/event/editPacient";
 import {EmpresaEvent} from "../../../../../models/interfaces/enums/pacients/PacientEvent";
-import {PacientService} from "../../../../services/pacients/pacients.service";
+import {EmpresaService} from "../../../../services/empresa/empresa.service";
 import {EditClienteAction} from "../../../../../models/interfaces/reports/event/EditClienteAction";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ReferralService} from "../../../../services/referral/referral.service";
@@ -36,7 +36,7 @@ export class EmpresaTableComponent implements OnInit{
 
 
 
-  constructor(private empresaService: PacientService, private toastMessage: ToastMessage, private referralService: ReferralService) {
+  constructor(private empresaService: EmpresaService, private toastMessage: ToastMessage, private referralService: ReferralService) {
   }
 
   ngOnInit(): void {
