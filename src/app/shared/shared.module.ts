@@ -8,7 +8,7 @@ import {ButtonModule} from "primeng/button";
 import {DialogService} from "primeng/dynamicdialog";
 import { ToolbarNavigationComponent } from './components/toolbar-navigation/toolbar-navigation.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
-import { ReportFormComponent } from '../modules/reports/components/report-form/report-form.component';
+import { ClienteFormComponent } from '../modules/cliente/components/cliente-form/cliente-form.component';
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextareaModule} from "primeng/inputtextarea";
@@ -21,7 +21,7 @@ import {TooltipModule} from "primeng/tooltip";
 @NgModule({
   declarations: [
     ToolbarNavigationComponent,
-    ReportFormComponent,
+    ClienteFormComponent,
     ShortenPipe,
   ],
   imports: [

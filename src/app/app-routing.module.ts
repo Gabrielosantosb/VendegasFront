@@ -21,8 +21,8 @@ const routes: Routes = [
   },
   {
     path : "report",
-    loadChildren: ()=> import('./modules/reports/reports.module')
-      .then((m)=> m.ReportsModule),
+    loadChildren: ()=> import('./modules/cliente/cliente.module')
+      .then((m)=> m.ClienteModule),
     canActivate:[AuthGuardService]
   },
   {

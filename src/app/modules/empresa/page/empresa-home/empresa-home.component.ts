@@ -14,7 +14,7 @@ import {EmpresaFormComponent} from "../../components/empresa-form/empresa-form/e
 import {ReportsDataTransferService} from "../../../../shared/reports/reports-data-transfer.service";
 import {DeletePacient} from "../../../../../models/interfaces/pacients/event/deletePacient";
 import {ProgressBarModule} from "primeng/progressbar";
-import {ReportFormComponent} from "../../../reports/components/report-form/report-form.component";
+import {ClienteFormComponent} from "../../../cliente/components/cliente-form/cliente-form.component";
 
 @Component({
   selector: 'app-empresa-home',
@@ -68,7 +68,7 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
   handleClienteAction(event :EventAction): void{
     console.log('Evento bateu' , event)
     if (event) {
-      this.ref = this.dialogService.open(ReportFormComponent, {
+      this.ref = this.dialogService.open(ClienteFormComponent, {
         header: event?.action,
         width: '70%',
         contentStyle: {overflow: 'auto'},

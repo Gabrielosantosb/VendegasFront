@@ -9,7 +9,7 @@ import {PacientService} from "../../../../services/pacients/pacients.service";
 import {EditClienteAction} from "../../../../../models/interfaces/reports/event/EditClienteAction";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ReferralService} from "../../../../services/referral/referral.service";
-import {ClienteEvent} from "../../../../../models/interfaces/enums/report/ClienteEvent";
+import {ClienteEvent} from "../../../../../models/interfaces/enums/cliente/ClienteEvent";
 
 @Component({
   selector: 'app-empresa-table',
