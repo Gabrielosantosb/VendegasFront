@@ -65,7 +65,7 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
   }
 
 
-  handleReportAction(event :EventAction): void{
+  handleClienteAction(event :EventAction): void{
     console.log('Evento bateu' , event)
     if (event) {
       this.ref = this.dialogService.open(ReportFormComponent, {

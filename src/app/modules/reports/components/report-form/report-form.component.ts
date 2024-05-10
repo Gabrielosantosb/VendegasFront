@@ -7,8 +7,8 @@ import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ProgressBarModule} from "primeng/progressbar";
 import {ConfirmationModal} from "../../../../services/confirmation/confirmation-service.service";
 import {ReportsService} from "../../../../services/reports/reports.service";
-import {ReportEvent} from "../../../../../models/interfaces/enums/report/ReportEvent.js";
-import {EditClienteAction} from "../../../../../models/interfaces/reports/event/EditReportAction";
+import {ClienteEvent} from "../../../../../models/interfaces/enums/report/ClienteEvent";
+import {EditClienteAction} from "../../../../../models/interfaces/reports/event/EditClienteAction";
 import {
   GetReportResponse,
   ReportRequest
@@ -28,8 +28,8 @@ export class ReportFormComponent implements OnInit, OnDestroy {
   isLoading = false
   loadingMode: ProgressBarModule = 'indeterminate';
 
-  public addReportAction = ReportEvent.ADD_REPORT_EVENT;
-  public editReportAction = ReportEvent.EDIT_REPORT_EVENT;
+  public addReportAction = ClienteEvent.ADD_CLIENTE_EVENT;
+  public editReportAction = ClienteEvent.EDIT_CLIENTE_EVENT;
   public reportAction !: { event: EditClienteAction }
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
   reportId = 0;

@@ -11,7 +11,6 @@ import {ProgressBar, ProgressBarModule} from "primeng/progressbar";
 import {
   AddEmpresaRequest,
   EditEmpresaRequest, GetEmpresaResponse,
-  GetPacientsResponse
 } from "../../../../../../models/interfaces/pacients/get-pacient-service.service";
 
 @Component({
