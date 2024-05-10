@@ -16,7 +16,7 @@ import {ReportsService} from "../../../../services/reports/reports.service";
   styleUrls: ['report-table.scss']
 })
 export class ClienteTableComponent {
-  @Input() reports: Array<GetClienteResponse> = [];
+  @Input() clientes: Array<GetClienteResponse> = [];
   @Output() reportEvent = new EventEmitter<EventAction>()
   @Output() deleteReportEvent = new EventEmitter<DeleteReportAction>()
   showProfissionalReports = false
@@ -28,10 +28,10 @@ export class ClienteTableComponent {
 
 
   handleShowAllReports(): void {
-    this.reportService.getAllReports().subscribe({
+    this.reportService.getAllClientes().subscribe({
       next: (allReportData) => {
         this.showProfissionalReports = false
-        this.reports = allReportData;
+        this.clientes = allReportData;
       },
       error: (error) => {
         console.error('Erro ao obter fichas do usuário:', error);

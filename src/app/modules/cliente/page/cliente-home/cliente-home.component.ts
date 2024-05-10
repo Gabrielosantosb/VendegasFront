@@ -24,7 +24,7 @@ import {DeleteReportAction} from "../../../../../models/interfaces/reports/event
 export class ClienteHomeComponent implements OnDestroy, OnInit {
   private readonly destroy$: Subject<void> = new Subject();
   private ref!: DynamicDialogRef;
-  public reportData : Array<GetClienteResponse> = []
+  public clientesData : Array<GetClienteResponse> = []
   isLoading = false
 
   constructor(
@@ -36,20 +36,20 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    // this.getAllReports();
+    this.getAllClientes();
   }
 
 
 
-  getAllReports(){
+  getAllClientes(){
     this.isLoading = true
     this.reportService
-      .getAllReports()
+      .getAllClientes()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response: GetClienteResponse[]) =>{
           if(response){
-            this.reportData = response
+            this.clientesData = response
             this.isLoading = false
           }
         },
@@ -117,7 +117,7 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: () => {
-              this.getAllReports()
+              this.getAllClientes()
               this.toastMessage.SuccessMessage('Ficha removida com sucesso!')
           },
           error: (err) => {

@@ -39,7 +39,9 @@ export class ReportsService {
       this.httpOptions
     );
   }
-
+  getAllClientes(): Observable<Array<GetClienteResponse>> {
+    return this.http.get<Array<GetClienteResponse>>(`${this.API_URL}/api/Cliente/get-all-clientes`, this.httpOptions)
+  }
 
 
   getAllReports(): Observable<Array<GetClienteResponse>> {

@@ -1,11 +1,11 @@
 <div class='grid'>
   <div class='col-12'>
-    <p-card class="shadow-3 m-5 text-indigo-800" styleClass="text-center" header="Fichas">
+    <p-card class="shadow-3 m-5 text-indigo-800" styleClass="text-center" header="Clientes">
     <div class="flex flex-row justify-content-around " style="margin-bottom: 10px;">
       </div>
       <hr style="border: 1px solid #ccc; width: 100%; margin-bottom: 20px;">
       <p-table
-        [value]="reports"
+        [value]="clientes"
         [(selection)]="selectedCliente"
         [rows]="10"
         [paginator]="true"
@@ -20,16 +20,16 @@
           <tr>
             <th pSortableColumn="reportDateTime">
               <div class='flex justify-content-between align-items-center'>
-                Data criada
-                <p-sortIcon field='reportDateTime'></p-sortIcon>
+                Nome do cliente
+                <p-sortIcon field='clienteName'></p-sortIcon>
               </div>
             </th>
-            <th pSortableColumn="pacientName">
-              Nome do Paciente
-              <p-sortIcon field='pacientName'></p-sortIcon>
+            <th pSortableColumn="email">
+              Email
+              <p-sortIcon field='email'></p-sortIcon>
               <p-columnFilter
                 type="text"
-                field='pacientName'
+                field='email'
                 display="menu"
                 matchMode="contains"
                 [showMatchModes]='false'
@@ -41,10 +41,10 @@
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-report>
+        <ng-template pTemplate="body" let-cliente>
           <tr>
-            <td>{{ report?.reportDateTime | date: 'dd/MM/yyyy HH:mm' }}</td>
-            <td>{{ report?.pacientName }}</td>
+            <td>{{ cliente?.clienteName}}</td>
+            <td>{{ cliente?.email }}</td>
             <td>
               <div class='flex justify-content-center gap-3 align-content-center align-items-center'
                    style="margin-bottom: 10px">
@@ -55,7 +55,7 @@
                   tooltipPosition="top"
                   icon='pi pi-trash'
                   class="p-button-outlined p-button-danger"
-                  (click)="handleDeleteReport(report?.reportId, report?.pacientName)"
+                  (click)="handleDeleteReport(cliente?.reportId, cliente?.pacientName)"
                 ></button>
                 <button
                   pButton
@@ -64,7 +64,7 @@
                   tooltipPosition="top"
                   icon='pi pi-eye'
                   class="p-button-outlined p-button-info"
-                  (click)="openReportDetails(report)"
+                  (click)="openReportDetails(cliente)"
                 ></button>
               </div>
             </td>
