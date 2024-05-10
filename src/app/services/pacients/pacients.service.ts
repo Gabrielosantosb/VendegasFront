@@ -36,16 +36,11 @@ export class PacientService {
     )
   }
 
-  getProfissionalPacients(): Observable<Array<GetPacientsResponse>> {
-    return this.http.get<Array<GetPacientsResponse>>(
-      `${this.API_URL}/api/Pacient/get-profissional-pacient`,
-      this.httpOptions
-    )
-  }
 
-  getPacientById(pacientId: number): Observable<GetPacientsResponse> {
-    return this.http.get<GetPacientsResponse>(
-      `${this.API_URL}/api/Pacient/get-pacient/${pacientId}`
+  getPacientById(empresaId: number): Observable<GetEmpresaResponse> {
+    return this.http.get<GetEmpresaResponse>(
+      `${this.API_URL}/api/Empresa/get-empresa/${empresaId}`,
+      this.httpOptions
     );
   }
 

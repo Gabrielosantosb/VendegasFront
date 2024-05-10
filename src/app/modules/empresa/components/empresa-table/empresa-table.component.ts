@@ -41,10 +41,6 @@ export class EmpresaTableComponent implements OnInit{
   ngOnInit(): void {
         this.handleShowAllEmpresas()
     }
-
-
-
-
   showModal(pacientId: number) {
     this.displayModal = true;
     this.pacientId = pacientId
@@ -57,7 +53,7 @@ export class EmpresaTableComponent implements OnInit{
 
 
 
-  handlePacientEvent(action: string, id?: number, pacientName?: string): void {
+  handleEmpresaEvent(action: string, id?: number, pacientName?: string): void {
     if (action && action !== '') this.pacientEvent.emit({action, id, pacientName});
   }
 
@@ -74,18 +70,4 @@ export class EmpresaTableComponent implements OnInit{
       }
     });
   }
-
-  handleProfissionalPacients(): void {
-    console.log('bateu no profissionalPacients')
-
-    this.pacientService.getProfissionalPacients().subscribe({
-      next: (profissionalPacientsData) => {
-        this.pacients = profissionalPacientsData;
-      },
-      error: (error) => {
-        console.error('Erro ao obter os pacientes do usuário:', error);
-      }
-    });
-  }
-
 }

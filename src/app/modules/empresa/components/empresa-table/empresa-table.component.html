@@ -68,7 +68,7 @@
                   pTooltip="Adicionar empresa"
                   tooltipPosition="top"
                   label='Adicionar'
-                  (click)="handlePacientEvent(addPacientAction)"
+                  (click)="handleEmpresaEvent(addPacientAction)"
                 ></p-button>
               </div>
             </th>
@@ -89,7 +89,7 @@
                   tooltipPosition="top"
                   icon='pi pi-pencil'
                   class="p-button-outlined p-button-primary"
-                  (click)="handlePacientEvent(editPacientAction, empresa?.pacientId, empresa?.username)"
+                  (click)="handleEmpresaEvent(editPacientAction, empresa?.empresaId, empresa?.razaoSocial)"
                 ></button>
 
               </div>

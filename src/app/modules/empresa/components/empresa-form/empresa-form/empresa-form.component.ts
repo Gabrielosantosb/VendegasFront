@@ -10,7 +10,7 @@ import {PacientService} from "../../../../../services/pacients/pacients.service"
 import {ProgressBar, ProgressBarModule} from "primeng/progressbar";
 import {
   AddEmpresaRequest,
-  EditEmpresaRequest,
+  EditEmpresaRequest, GetEmpresaResponse,
   GetPacientsResponse
 } from "../../../../../../models/interfaces/pacients/get-pacient-service.service";
 
@@ -26,7 +26,7 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
   loadingMode: ProgressBarModule = 'indeterminate';
 
   public addEmpresaAction = EmpresaEvent.ADD_EMPRESA_ACTION;
-  public editPacientAction = EmpresaEvent.EDIT_EMPRESA_ACTION;
+  public editEmpresaAction = EmpresaEvent.EDIT_EMPRESA_ACTION;
   public showReportForm: boolean = false;
   public empresaAction!: { event: EditPacientAction };
 
@@ -49,31 +49,24 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    console.log('bateu aqui', this.ref.data)
     this.empresaAction = this.ref.data;
-    if (
-      this.empresaAction?.event?.action === this.addEmpresaAction
-    ) {
-      if (
-        this.empresaAction?.event?.action === this.editPacientAction &&
-        this.empresaAction?.event?.pacientName !== null &&
-        this.empresaAction?.event?.pacientName !== undefined &&
-        this.empresaAction?.event?.id !== undefined
-      ) {
-        this.loadPacientData(this.empresaAction.event.id);
-      }
+    if (this.empresaAction?.event?.action === this.editEmpresaAction && this.empresaAction?.event?.id !== undefined) {
+      this.loadPacientData(this.empresaAction.event.id);
     }
   }
 
   loadPacientData(pacientId: number): void {
+    console.log('bateu aqui2')
     this.empresaService.getPacientById(pacientId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (pacientData: GetPacientsResponse) => {
+        next: (pacientData: GetEmpresaResponse) => {
           console.log('Dados da emprsa carregados:', pacientData);
           this.empresaForm.patchValue({
-            nomeFantasia: pacientData.username,
-            razaoSocial: pacientData.email,
-            cnpj: pacientData.address,
+            nomeFantasia: pacientData.nomeFantasia,
+            razaoSocial: pacientData.razaoSocial,
+            cnpj: pacientData.cnpj,
           });
           this.showReportForm = true;
         },
@@ -86,7 +79,7 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
 
   handleSubmitEmpresaAction(): void {
     if (this.empresaAction?.event?.action === this.addEmpresaAction) this.handleSubmitAddEmpresa();
-    if (this.empresaAction?.event?.action === this.editPacientAction) this.handleSubmitEditPacient();
+    if (this.empresaAction?.event?.action === this.editEmpresaAction) this.handleSubmitEditEmpresa();
     return;
   }
 
@@ -116,7 +109,8 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleSubmitEditPacient(): void {
+  handleSubmitEditEmpresa(): void {
+    console.log("bateu em editar empresa")
     if (
       this.empresaForm?.value &&
       this.empresaForm?.valid &&
