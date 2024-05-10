@@ -3,6 +3,7 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./modules/home/home.component";
 import {AuthGuardService} from "./guards/auth-guard.service";
 import {NotfoundComponent} from "./comon-pages/notfound/notfound.component";
+import {ClienteHomeComponent} from "./modules/cliente/page/cliente-home/cliente-home.component";
 const routes: Routes = [
   {
     path : "",
@@ -13,6 +14,7 @@ const routes: Routes = [
     path : "home",
     component: HomeComponent,
   },
+
   {
     path : "dashboard",
     loadChildren: ()=> import('./modules/dashboard/dashboard.module')
@@ -20,15 +22,15 @@ const routes: Routes = [
     canActivate:[AuthGuardService]
   },
   {
-    path : "report",
-    loadChildren: ()=> import('./modules/cliente/cliente.module')
-      .then((m)=> m.ClienteModule),
-    canActivate:[AuthGuardService]
-  },
-  {
     path : "empresa",
     loadChildren: ()=> import('./modules/empresa/empresa.module')
       .then((m)=> m.EmpresaModule),
+    canActivate:[AuthGuardService]
+  },
+  {
+    path : "cliente",
+    loadChildren: ()=> import('./modules/cliente/cliente.module')
+      .then((m)=> m.ClienteModule),
     canActivate:[AuthGuardService]
   },
   {

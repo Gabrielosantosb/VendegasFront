@@ -10,7 +10,7 @@ import {ReportsService} from "../../../../services/reports/reports.service";
 import {ClienteEvent} from "../../../../../models/interfaces/enums/cliente/ClienteEvent";
 import {EditClienteAction} from "../../../../../models/interfaces/reports/event/EditClienteAction";
 import {
-  GetReportResponse,
+  GetClienteResponse,
   ClienteRequest
 } from "../../../../../models/interfaces/reports/response/GetAllProductsResponse";
 import {CookieService} from "ngx-cookie-service";
@@ -66,7 +66,7 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
 
     if(this.clienteAction.event.action == this.editClientAction && this.clienteAction.event.id)
     {
-      this.loadReportData(this.clienteAction.event.id)
+      // this.loadReportData(this.clienteAction.event.id)
 
     }
 
@@ -124,20 +124,20 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
   }
 
 
-  loadReportData(pacientId: number): void {
-    this.clienteService.getReportByPacientId(pacientId, this.clienteForm)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (reportData: GetReportResponse) => {
-          this.reportId = reportData.reportId
-          console.log('Dados ficha carregados:', reportData);
-
-        },
-        error: (error) => {
-          console.error('Erro ao  dados da ficha:', error);
-        }
-      });
-  }
+  // loadReportData(pacientId: number): void {
+  //   this.clienteService.getReportByPacientId(pacientId, this.clienteForm)
+  //     .pipe(takeUntil(this.destroy$))
+  //     .subscribe({
+  //       next: (reportData: GetReportResponse) => {
+  //         this.reportId = reportData.reportId
+  //         console.log('Dados ficha carregados:', reportData);
+  //
+  //       },
+  //       error: (error) => {
+  //         console.error('Erro ao  dados da ficha:', error);
+  //       }
+  //     });
+  // }
 
 
 

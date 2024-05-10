@@ -14,7 +14,7 @@
         [rowHover]='true'
         [showCurrentPageReport]='true'
         dataKey="id"
-        currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} fichas"
+        currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} clientes"
       >
         <ng-template pTemplate="header">
           <tr>
@@ -79,26 +79,4 @@
   <p-confirmDialog></p-confirmDialog>
 
 
-  <p-dialog [(visible)]="displayModal" [modal]="true" [responsive]="true" [style]="{width: '60vw'}">
-    <div *ngIf="selectedCliente" class="p-fluid">
-      <div style="text-align: center;">
-        <h1 class="modal-title">Detalhes da ficha</h1>
-        <p class="modal-content">Nome: <span style="font-weight: bold;">{{ selectedCliente.pacientName }}</span></p>
-        <p class="modal-content">Data e Hora de Criação: <span
-          style="font-weight: bold;">{{ selectedCliente.reportDateTime | date: 'dd/MM/yyyy HH:mm' }}</span></p>
-      </div>
-      <hr class="modal-hr">
-
-      <div style="margin-top: 20px;">
-        <div class="report-field">
-          <label>Histórico Médico:</label>
-          <div>{{ selectedCliente.medicalHistory }}</div>
-        </div>
-
-
-
-
-      </div>
-    </div>
-  </p-dialog>
 </div>

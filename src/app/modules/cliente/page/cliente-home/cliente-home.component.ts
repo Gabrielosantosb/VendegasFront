@@ -4,8 +4,7 @@ import {ReportsService} from "../../../../services/reports/reports.service";
 import {ReportsDataTransferService} from "../../../../shared/reports/reports-data-transfer.service";
 import {Router} from "@angular/router";
 import {
-  GetAllProductsResponse,
-  GetReportResponse
+  GetAllProductsResponse, GetClienteResponse,
 } from "../../../../../models/interfaces/reports/response/GetAllProductsResponse";
 import {ConfirmationService} from "primeng/api";
 import {EventAction} from "../../../../../models/interfaces/reports/event/EventAction";
@@ -25,7 +24,7 @@ import {DeleteReportAction} from "../../../../../models/interfaces/reports/event
 export class ClienteHomeComponent implements OnDestroy, OnInit {
   private readonly destroy$: Subject<void> = new Subject();
   private ref!: DynamicDialogRef;
-  public reportData : Array<GetReportResponse> = []
+  public reportData : Array<GetClienteResponse> = []
   isLoading = false
 
   constructor(
@@ -37,7 +36,7 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllReports();
+    // this.getAllReports();
   }
 
 
@@ -48,7 +47,7 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
       .getAllReports()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (response: GetReportResponse[]) =>{
+        next: (response: GetClienteResponse[]) =>{
           if(response){
             this.reportData = response
             this.isLoading = false
@@ -56,7 +55,7 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
         },
         error:(err:Error) =>{
           console.log(err)
-          this.toastMessage.ErrorMessage("Erro ao buscar fichas")
+          this.toastMessage.ErrorMessage("Erro ao buscar clientes")
         }
       })
   }

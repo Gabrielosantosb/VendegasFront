@@ -4,7 +4,7 @@ import {CookieService} from "ngx-cookie-service";
 import {environments} from "../../../environments/environments";
 import {map, Observable, tap} from "rxjs";
 import {
-  GetReportResponse, ClienteRequest, GetClienteResponse
+  GetClienteResponse, ClienteRequest
 } from "../../../models/interfaces/reports/response/GetAllProductsResponse";
 import {DeleteProductResponse} from "../../../models/interfaces/reports/response/DeleteProductResponse";
 import {FormGroup} from "@angular/forms";
@@ -26,8 +26,8 @@ export class ReportsService {
   }
 
 
-  createReport(pacientId: number, requestData: ClienteRequest): Observable<Array<GetReportResponse>> {
-    return this.http.post<Array<GetReportResponse>>(
+  createReport(pacientId: number, requestData: ClienteRequest): Observable<Array<GetClienteResponse>> {
+    return this.http.post<Array<GetClienteResponse>>(
       `${this.API_URL}/api/Report/create-report/${pacientId}`, requestData, this.httpOptions
     );
   }
@@ -42,33 +42,33 @@ export class ReportsService {
 
 
 
-  getAllReports(): Observable<Array<GetReportResponse>> {
-    return this.http.get<Array<GetReportResponse>>(`${this.API_URL}/api/Report/get-reports`, this.httpOptions)
+  getAllReports(): Observable<Array<GetClienteResponse>> {
+    return this.http.get<Array<GetClienteResponse>>(`${this.API_URL}/api/Report/get-reports`, this.httpOptions)
   }
 
-  getReportByPacientId(pacientId: number, reportForm: FormGroup): Observable<GetReportResponse> {
-    return this.http.get<GetReportResponse>(`${this.API_URL}/api/Report/get-pacient-report/${pacientId}`, this.httpOptions).pipe(
-      tap((reportData: GetReportResponse) =>{
-          reportForm.patchValue({
-            medicalHistory: reportData.medicalHistory || '',
-            currentMedications: reportData.currentMedications || '',
-            cardiovascularIssues: reportData.cardiovascularIssues || false,
-            diabetes: reportData.diabetes || false,
-            familyHistoryCardiovascularIssues: reportData.familyHistoryCardiovascularIssues || false,
-            familyHistoryDiabetes: reportData.familyHistoryDiabetes || false,
-            physicalActivity: reportData.physicalActivity || '',
-            smoker: reportData.smoker || false,
-            alcoholConsumption: reportData.alcoholConsumption || 0,
-            emergencyContactName: reportData.emergencyContactName || '',
-            emergencyContactPhone: reportData.emergencyContactPhone || '',
-            observations: reportData.observations || ''
-          })
-      })
-    )
-  }
+  // getReportByPacientId(pacientId: number, reportForm: FormGroup): Observable<GetClienteResponse> {
+  //   return this.http.get<GetClienteResponse>(`${this.API_URL}/api/Report/get-pacient-report/${pacientId}`, this.httpOptions).pipe(
+  //     tap((reportData: GetClienteResponse) =>{
+  //         reportForm.patchValue({
+  //           medicalHistory: reportData.medicalHistory || '',
+  //           currentMedications: reportData.currentMedications || '',
+  //           cardiovascularIssues: reportData.cardiovascularIssues || false,
+  //           diabetes: reportData.diabetes || false,
+  //           familyHistoryCardiovascularIssues: reportData.familyHistoryCardiovascularIssues || false,
+  //           familyHistoryDiabetes: reportData.familyHistoryDiabetes || false,
+  //           physicalActivity: reportData.physicalActivity || '',
+  //           smoker: reportData.smoker || false,
+  //           alcoholConsumption: reportData.alcoholConsumption || 0,
+  //           emergencyContactName: reportData.emergencyContactName || '',
+  //           emergencyContactPhone: reportData.emergencyContactPhone || '',
+  //           observations: reportData.observations || ''
+  //         })
+  //     })
+  //   )
+  // }
 
-  getReportById(reportId: number, reportForm: FormGroup): Observable<GetReportResponse> {
-    return this.http.get<GetReportResponse>(
+  getReportById(reportId: number, reportForm: FormGroup): Observable<GetClienteResponse> {
+    return this.http.get<GetClienteResponse>(
       `${this.API_URL}/api/Report/get-report/${reportId}`,
       this.httpOptions
     )

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {
   GetAllProductsResponse,
-  GetReportResponse
+  GetClienteResponse
 } from "../../../../../models/interfaces/reports/response/GetAllProductsResponse";
 import {EventAction} from "../../../../../models/interfaces/reports/event/EventAction";
 import {
@@ -16,11 +16,11 @@ import {ReportsService} from "../../../../services/reports/reports.service";
   styleUrls: ['report-table.scss']
 })
 export class ClienteTableComponent {
-  @Input() reports: Array<GetReportResponse> = [];
+  @Input() reports: Array<GetClienteResponse> = [];
   @Output() reportEvent = new EventEmitter<EventAction>()
   @Output() deleteReportEvent = new EventEmitter<DeleteReportAction>()
   showProfissionalReports = false
-  public selectedCliente!: GetReportResponse;
+  public selectedCliente!: GetClienteResponse;
   displayModal: boolean = false;
 
   constructor(private reportService: ReportsService) {
@@ -43,7 +43,7 @@ export class ClienteTableComponent {
     if (action && action !== '') this.reportEvent.emit({action, id})
   }
 
-  openReportDetails(report: GetReportResponse) {
+  openReportDetails(report: GetClienteResponse) {
     this.selectedCliente = report;
     this.displayModal = true;
   }
