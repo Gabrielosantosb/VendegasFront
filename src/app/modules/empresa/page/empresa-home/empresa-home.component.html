@@ -1,0 +1,14 @@
+<app-toolbar-navigation></app-toolbar-navigation>
+
+<p-progressBar *ngIf="isLoading" mode="{{loadingMode}}"></p-progressBar>
+
+
+<app-pacients-table
+  [pacients]="pacientsData"
+  (deletePacientEvent)="handleDeletePacientAction($event)"
+  (pacientEvent)="handlePacientAction($event)"
+  (reportEvent)="handleReportAction($event)"
+
+></app-pacients-table>
+
+

@@ -1,0 +1,140 @@
+<div class='grid'>
+  <div class='col-12'>
+    <p-card class="shadow-3 m-5 text-indigo-800" styleClass="text-center" header="Fichas">
+    <div class="flex flex-row justify-content-around " style="margin-bottom: 10px;">
+      </div>
+      <hr style="border: 1px solid #ccc; width: 100%; margin-bottom: 20px;">
+      <p-table
+        [value]="reports"
+        [(selection)]="selectedReport"
+        [rows]="10"
+        [paginator]="true"
+        [responsive]="true"
+        [tableStyle]="{'min-width': '75rem' }"
+        [rowHover]='true'
+        [showCurrentPageReport]='true'
+        dataKey="id"
+        currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} fichas"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="reportDateTime">
+              <div class='flex justify-content-between align-items-center'>
+                Data criada
+                <p-sortIcon field='reportDateTime'></p-sortIcon>
+              </div>
+            </th>
+            <th pSortableColumn="pacientName">
+              Nome do Paciente
+              <p-sortIcon field='pacientName'></p-sortIcon>
+              <p-columnFilter
+                type="text"
+                field='pacientName'
+                display="menu"
+                matchMode="contains"
+                [showMatchModes]='false'
+                [showAddButton]="false"
+                [showOperator]="false"
+              ></p-columnFilter>
+            </th>
+            <th>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-report>
+          <tr>
+            <td>{{ report?.reportDateTime | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ report?.pacientName }}</td>
+            <td>
+              <div class='flex justify-content-center gap-3 align-content-center align-items-center'
+                   style="margin-bottom: 10px">
+                <button
+                  pButton
+                  pRipple
+                  pTooltip='Excluir Ficha'
+                  tooltipPosition="top"
+                  icon='pi pi-trash'
+                  class="p-button-outlined p-button-danger"
+                  (click)="handleDeleteReport(report?.reportId, report?.pacientName)"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  pTooltip='Visualizar Ficha'
+                  tooltipPosition="top"
+                  icon='pi pi-eye'
+                  class="p-button-outlined p-button-info"
+                  (click)="openReportDetails(report)"
+                ></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <ng-template #noReports>
+        <div class="text-center">Nenhuma ficha encontrada.</div>
+      </ng-template>
+    </p-card>
+  </div>
+  <p-confirmDialog></p-confirmDialog>
+
+
+  <p-dialog [(visible)]="displayModal" [modal]="true" [responsive]="true" [style]="{width: '60vw'}">
+    <div *ngIf="selectedReport" class="p-fluid">
+      <div style="text-align: center;">
+        <h1 class="modal-title">Detalhes da ficha</h1>
+        <p class="modal-content">Nome: <span style="font-weight: bold;">{{ selectedReport.pacientName }}</span></p>
+        <p class="modal-content">Data e Hora de Criação: <span
+          style="font-weight: bold;">{{ selectedReport.reportDateTime | date: 'dd/MM/yyyy HH:mm' }}</span></p>
+      </div>
+      <hr class="modal-hr">
+
+      <div style="margin-top: 20px;">
+        <div class="report-field">
+          <label>Histórico Médico:</label>
+          <div>{{ selectedReport.medicalHistory }}</div>
+        </div>
+
+        <div class="report-field">
+          <label>Medicações Atuais:</label>
+          <div>{{ selectedReport.currentMedications }}</div>
+        </div>
+
+        <div class="report-field">
+          <label>Problemas Cardiovasculares:</label>
+          <div>{{ selectedReport.cardiovascularIssues ? 'Sim' : 'Não' }}</div>
+        </div>
+
+        <div class="report-field">
+          <label>Diabetes:</label>
+          <div>{{ selectedReport.diabetes ? 'Sim' : 'Não' }}</div>
+        </div>
+
+        <div class="report-field">
+          <label>Diabetes Familiar:</label>
+          <div>{{ selectedReport.familyHistoryCardiovascularIssues ? 'Sim' : 'Não' }}</div>
+        </div>
+
+        <div class="report-field">
+          <label>Atividade Física:</label>
+          <div>{{ selectedReport.physicalActivity }}</div>
+        </div>
+
+        <div class="report-field">
+          <label>Fumante:</label>
+          <div>{{ selectedReport.smoker ? 'Sim' : 'Não' }}</div>
+        </div>
+
+        <div class="report-field">
+          <label>Contato de emergência:</label>
+          <div>{{ selectedReport.emergencyContactName }} - {{ selectedReport.emergencyContactPhone }}</div>
+        </div>
+
+        <div class="report-field">
+          <label>Observações:</label>
+          <div>{{ selectedReport.observations ? selectedReport.observations : "Nenhuma" }}</div>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+</div>
