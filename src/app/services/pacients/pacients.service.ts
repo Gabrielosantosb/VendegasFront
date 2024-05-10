@@ -4,8 +4,8 @@ import {CookieService} from "ngx-cookie-service";
 import {environments} from "../../../environments/environments";
 import {Observable, tap} from "rxjs";
 import {
-  AddEmpresaRequest,
-  EditPacientRequest, GetEmpresaResponse,
+  AddEmpresaRequest, EditEmpresaRequest,
+  GetEmpresaResponse,
   GetPacientsResponse, SendMedicalSpecialityRequest,
 
 } from "../../../models/interfaces/pacients/get-pacient-service.service";
@@ -67,9 +67,10 @@ export class PacientService {
     );
   }
 
-  editPacient(requestData: EditPacientRequest): Observable<void> {
+  editEmpresa(requestData: EditEmpresaRequest): Observable<void> {
+    console.log("AQUI O EDITEMPRESA", requestData)
     return this.http.put<void>(
-      `${this.API_URL}/api/Pacient/update-pacient/${requestData.pacient_id}`,
+      `${this.API_URL}/api/Empresa/update-empresa/${requestData.empresaId}`,
       requestData,
       this.httpOptions
     );

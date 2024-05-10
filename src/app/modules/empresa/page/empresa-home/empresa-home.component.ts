@@ -39,7 +39,7 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.getAllPacients();
+    this.getAllEmpresas()
   }
 
 
@@ -58,41 +58,12 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
         error: (err : []) => {
           console.log(err);
           this.isLoading = false
-          this.toastMessage.ErrorMessage('Erro ao buscar Pacientes!')
+          this.toastMessage.ErrorMessage('Erro ao buscar Empresas!')
           this.router.navigate(['/dashboard']);
         },
       });
   }
-  handleDeletePacientAction(event: DeletePacient): void {
-    if (event.pacientName != null) {
-      console.log(event)
-        this.confirmationModal.confirmDelete(`Confirma a exclusão do paciente: ${event?.pacientName}`, () => this.deletePacient(event?.pacient_id));
 
-    } else {
-      this.toastMessage.ErrorMessage(`Não é possível excluir o Paciente ${event.pacientName}`);
-    }
-  }
-
-  deletePacient(pacient_id: number): void {
-    if (pacient_id) {
-      this.empresaService
-        .deletePacient({pacient_id})
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: () => {
-            this.getAllEmpresas();
-            this.toastMessage.SuccessMessage('Paciente  removida com sucesso!')
-          },
-          error: (err: string) => {
-            console.log(err);
-            this.getAllEmpresas();
-            this.toastMessage.ErrorMessage('Erro ao remover paciente !')
-          },
-        });
-
-      this.getAllEmpresas();
-    }
-  }
 
   handleReportAction(event :EventAction): void{
     console.log('Evento bateu' , event)

@@ -10,7 +10,7 @@ import {PacientService} from "../../../../../services/pacients/pacients.service"
 import {ProgressBar, ProgressBarModule} from "primeng/progressbar";
 import {
   AddEmpresaRequest,
-  EditPacientRequest,
+  EditEmpresaRequest,
   GetPacientsResponse
 } from "../../../../../../models/interfaces/pacients/get-pacient-service.service";
 
@@ -122,10 +122,10 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
       this.empresaForm?.valid &&
       this.empresaAction?.event?.id
     ) {
-    const requestEditPacient = this.empresaForm.value as EditPacientRequest;
-    requestEditPacient.pacient_id =  this.empresaAction?.event?.id
+    const requestEditEmpresa = this.empresaForm.value as EditEmpresaRequest;
+      requestEditEmpresa.empresaId =  this.empresaAction?.event?.id
       this.empresaService
-        .editPacient(requestEditPacient)
+        .editEmpresa(requestEditEmpresa)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: () => {
