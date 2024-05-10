@@ -29,21 +29,19 @@ export interface GetReportResponse
   pacientId: number,
   pacientName: string,
 }
-
-export interface ReportRequest
+export interface GetClienteResponse
 {
-  medicalHistory: string;
-  currentMedications: string;
-  cardiovascularIssues: boolean;
-  address: string;
-  diabetes: boolean;
-  familyHistoryCardiovascularIssues: boolean;
-  familyHistoryDiabetes: boolean;
-  physicalActivity: string;
-  smoker: boolean;
-  alcoholConsumption: number;
-  emergencyContactName: string;
-  emergencyContactPhone: string;
-  observations: string;
+  clienteId: number,
+  clientName: string,
+  email: string,
+  telefone: string
+  empresaId: number;
+}
+
+export interface ClienteRequest
+{
+  clientName: string,
+  email: string,
+  telefone: string
 }
 

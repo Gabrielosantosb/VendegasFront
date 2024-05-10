@@ -11,7 +11,7 @@ import {ClienteEvent} from "../../../../../models/interfaces/enums/cliente/Clien
 import {EditClienteAction} from "../../../../../models/interfaces/reports/event/EditClienteAction";
 import {
   GetReportResponse,
-  ReportRequest
+  ClienteRequest
 } from "../../../../../models/interfaces/reports/response/GetAllProductsResponse";
 import {CookieService} from "ngx-cookie-service";
 import {environments} from "../../../../../environments/environments";
@@ -36,7 +36,7 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
   pacientId = 0
   public clienteForm = this.formBuilder.group({
 
-    clientName: ['', Validators.required],
+    clienteName: ['', Validators.required],
     email: ['', Validators.required],
     telefone: ['', Validators.required]
 
@@ -49,7 +49,7 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
     public ref: DynamicDialogConfig,
     private formBuilder: FormBuilder,
     private pacientService: PacientService,
-    private reportService: ReportsService,
+    private clienteService: ReportsService,
     private confirmationModal: ConfirmationModal,
     private toastMessage: ToastMessage,
     private cookie: CookieService,
@@ -82,10 +82,10 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
       console.error('ID do relatório inválido');
       return;
     }
-    const requestUpdateForm = this.clienteForm.value as ReportRequest;
+    const requestUpdateForm = this.clienteForm.value as ClienteRequest;
     console.log('Editar relatório:', requestUpdateForm);
 
-    this.reportService.editReport(this.reportId, requestUpdateForm)
+    this.clienteService.editReport(this.reportId, requestUpdateForm)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
@@ -101,11 +101,11 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
   }
 
   handleSubmitAddCliente(): void {
-    var pacientId  = this.clienteAction?.event?.id
-    if (this.clienteForm?.value && this.clienteForm?.valid && pacientId) {
-      const requestCreateForm = this.clienteForm.value as  ReportRequest
+    var empresaId  = this.clienteAction?.event?.id
+    if (this.clienteForm?.value && this.clienteForm?.valid && empresaId) {
+      const requestCreateForm = this.clienteForm.value as  ClienteRequest
       console.log('Adicionar relatório:', requestCreateForm)
-      this.reportService.createReport(pacientId, requestCreateForm).pipe(takeUntil(this.destroy$))
+      this.clienteService.createCliente(empresaId, requestCreateForm).pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response) => {
             if(response){
@@ -125,7 +125,7 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
 
 
   loadReportData(pacientId: number): void {
-    this.reportService.getReportByPacientId(pacientId, this.clienteForm)
+    this.clienteService.getReportByPacientId(pacientId, this.clienteForm)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (reportData: GetReportResponse) => {

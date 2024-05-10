@@ -4,7 +4,7 @@ import {CookieService} from "ngx-cookie-service";
 import {environments} from "../../../environments/environments";
 import {map, Observable, tap} from "rxjs";
 import {
-  GetReportResponse, ReportRequest
+  GetReportResponse, ClienteRequest, GetClienteResponse
 } from "../../../models/interfaces/reports/response/GetAllProductsResponse";
 import {DeleteProductResponse} from "../../../models/interfaces/reports/response/DeleteProductResponse";
 import {FormGroup} from "@angular/forms";
@@ -26,11 +26,20 @@ export class ReportsService {
   }
 
 
-  createReport(pacientId: number, requestData: ReportRequest): Observable<Array<GetReportResponse>> {
+  createReport(pacientId: number, requestData: ClienteRequest): Observable<Array<GetReportResponse>> {
     return this.http.post<Array<GetReportResponse>>(
       `${this.API_URL}/api/Report/create-report/${pacientId}`, requestData, this.httpOptions
     );
   }
+
+  createCliente(empresaId: number, requestData: ClienteRequest): Observable<Array<GetClienteResponse>> {
+    return this.http.post<Array<GetClienteResponse>>(
+      `${this.API_URL}/api/Cliente/create-client/${empresaId}`,
+      requestData,
+      this.httpOptions
+    );
+  }
+
 
 
   getAllReports(): Observable<Array<GetReportResponse>> {
@@ -77,7 +86,7 @@ export class ReportsService {
 
 
 
-editReport(reportId: number, requestData: ReportRequest): Observable<void>{
+editReport(reportId: number, requestData: ClienteRequest): Observable<void>{
     return this.http.put<void>(`${this.API_URL}/api/Report/update-report/${reportId}`, requestData, this.httpOptions)
 }
 
