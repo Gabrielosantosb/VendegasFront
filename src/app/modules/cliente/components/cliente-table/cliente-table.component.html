@@ -1,7 +1,7 @@
 <div class='grid'>
   <div class='col-12'>
     <p-card class="shadow-3 m-5 text-indigo-800" styleClass="text-center" header="Clientes">
-    <div class="flex flex-row justify-content-around " style="margin-bottom: 10px;">
+      <div class="flex flex-row justify-content-around " style="margin-bottom: 10px;">
       </div>
       <hr style="border: 1px solid #ccc; width: 100%; margin-bottom: 20px;">
       <p-table
@@ -21,15 +21,20 @@
             <th pSortableColumn="reportDateTime">
               <div class='flex justify-content-between align-items-center'>
                 Nome do cliente
-                <p-sortIcon field='clienteName'></p-sortIcon>
               </div>
             </th>
             <th pSortableColumn="email">
               Email
-              <p-sortIcon field='email'></p-sortIcon>
+            </th>
+            <th pSortableColumn="telefone">
+              Telefone
+            </th>
+            <th pSortableColumn="empresa">
+              Nome da empresa
+
               <p-columnFilter
                 type="text"
-                field='email'
+                field='empresa.nomeFantasia'
                 display="menu"
                 matchMode="contains"
                 [showMatchModes]='false'
@@ -37,14 +42,18 @@
                 [showOperator]="false"
               ></p-columnFilter>
             </th>
+
             <th>
             </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-cliente>
           <tr>
-            <td>{{ cliente?.clienteName}}</td>
+            <td>{{ cliente?.clienteName }}</td>
             <td>{{ cliente?.email }}</td>
+            <td>{{ cliente?.telefone }}</td>
+            <td>{{ cliente?.empresa.nomeFantasia }}</td>
+
             <td>
               <div class='flex justify-content-center gap-3 align-content-center align-items-center'
                    style="margin-bottom: 10px">

@@ -17,6 +17,12 @@ export interface GetClienteResponse
   email: string,
   telefone: string
   empresaId: number;
+  empresa: {
+    empresaId: number,
+    nomeFantasia: string,
+    razaoSocial: string,
+    cnpj: string
+  }
 }
 
 export interface ClienteRequest
