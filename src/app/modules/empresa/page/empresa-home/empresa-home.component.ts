@@ -37,7 +37,7 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getAllPacients();
+    // this.getAllPacients();
   }
 
 

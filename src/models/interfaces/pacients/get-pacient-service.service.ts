@@ -1,3 +1,11 @@
+export interface GetEmpresaResponse{
+  empresaId: number,
+  nomeFantasia: string,
+  razaoSocial: string,
+  cnpj: string
+}
+
+
 export interface GetPacientsResponse {
   id: number;
   username: string;

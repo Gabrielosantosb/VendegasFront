@@ -3,12 +3,12 @@
 <p-progressBar *ngIf="isLoading" mode="{{loadingMode}}"></p-progressBar>
 
 
-<app-pacients-table
+<app-empresa-table
   [pacients]="pacientsData"
   (deletePacientEvent)="handleDeletePacientAction($event)"
   (pacientEvent)="handlePacientAction($event)"
   (reportEvent)="handleReportAction($event)"
 
-></app-pacients-table>
+></app-empresa-table>
 
 

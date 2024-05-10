@@ -5,7 +5,7 @@ import {environments} from "../../../environments/environments";
 import {Observable, tap} from "rxjs";
 import {
   AddPacientRequest,
-  EditPacientRequest,
+  EditPacientRequest, GetEmpresaResponse,
   GetPacientsResponse, SendMedicalSpecialityRequest,
 
 } from "../../../models/interfaces/pacients/get-pacient-service.service";
@@ -31,6 +31,13 @@ export class PacientService {
   getAllPacients(): Observable<Array<GetPacientsResponse>> {
     return this.http.get<Array<GetPacientsResponse>>(
       `${this.API_URL}/api/Pacient/get-pacients`,
+      this.httpOptions
+    )
+  }
+
+  getAllEmpresas(): Observable<Array<GetEmpresaResponse>> {
+    return this.http.get<Array<GetEmpresaResponse>>(
+      `${this.API_URL}/api/Empresa/get-all-empresas`,
       this.httpOptions
     )
   }

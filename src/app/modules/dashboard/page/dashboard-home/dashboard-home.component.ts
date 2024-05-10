@@ -41,12 +41,12 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.detectChanges()
-    this.getAllPacients();
-    this.getProfissionalPacients()
-    this.getAllReport()
-    this.getSpecialysCount()
-    this.getUserInfo()
+    // this.detectChanges()
+    // this.getAllPacients();
+    // this.getProfissionalPacients()
+    // this.getAllReport()
+    // this.getSpecialysCount()
+    // this.getUserInfo()
   }
 
   private detectChanges(): void {
