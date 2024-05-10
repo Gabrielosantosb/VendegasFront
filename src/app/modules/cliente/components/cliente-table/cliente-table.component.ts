@@ -20,7 +20,7 @@ export class ClienteTableComponent {
   @Output() reportEvent = new EventEmitter<EventAction>()
   @Output() deleteReportEvent = new EventEmitter<DeleteReportAction>()
   showProfissionalReports = false
-  public selectedReport!: GetReportResponse;
+  public selectedCliente!: GetReportResponse;
   displayModal: boolean = false;
 
   constructor(private reportService: ReportsService) {
@@ -44,7 +44,7 @@ export class ClienteTableComponent {
   }
 
   openReportDetails(report: GetReportResponse) {
-    this.selectedReport = report;
+    this.selectedCliente = report;
     this.displayModal = true;
   }
   handleDeleteReport(reportId: number, pacientName: string): void {

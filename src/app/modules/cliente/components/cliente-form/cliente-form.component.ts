@@ -28,26 +28,18 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
   isLoading = false
   loadingMode: ProgressBarModule = 'indeterminate';
 
-  public addReportAction = ClienteEvent.ADD_CLIENTE_EVENT;
-  public editReportAction = ClienteEvent.EDIT_CLIENTE_EVENT;
-  public reportAction !: { event: EditClienteAction }
+  public addClienteAction = ClienteEvent.ADD_CLIENTE_EVENT;
+  public editClientAction = ClienteEvent.EDIT_CLIENTE_EVENT;
+  public clienteAction !: { event: EditClienteAction }
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
   reportId = 0;
   pacientId = 0
-  public reportForm = this.formBuilder.group({
+  public clienteForm = this.formBuilder.group({
 
-    medicalHistory: ['', Validators.required],
-    currentMedications: ['', Validators.required],
-    cardiovascularIssues: [false],
-    diabetes: [false],
-    familyHistoryCardiovascularIssues: [false],
-    familyHistoryDiabetes: [false],
-    physicalActivity: ['', Validators.required],
-    smoker: [false],
-    alcoholConsumption: [0, [Validators.min(0), Validators.max(5)]],
-    emergencyContactName: ['', Validators.required],
-    emergencyContactPhone: ['', Validators.required],
-    observations: ['']
+    clientName: ['', Validators.required],
+    email: ['', Validators.required],
+    telefone: ['', Validators.required]
+
   })
   private token = this.cookie.get(this.USER_AUTH)
 
@@ -66,95 +58,74 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.reportAction = this.ref.data;
-    if(this.reportAction.event.id  && this.reportAction.event.action == this.addReportAction)
+    this.clienteAction = this.ref.data;
+    if(this.clienteAction.event.id  && this.clienteAction.event.action == this.addClienteAction)
     {
-      this.pacientId = this.reportAction.event.id
+      this.pacientId = this.clienteAction.event.id
     }
 
-    if(this.reportAction.event.action == this.editReportAction && this.reportAction.event.id)
+    if(this.clienteAction.event.action == this.editClientAction && this.clienteAction.event.id)
     {
-      this.loadReportData(this.reportAction.event.id)
+      this.loadReportData(this.clienteAction.event.id)
 
     }
 
-  }
-  getIntegrationLink():void{
-    const url = `http://localhost:4200/?token=${this.token}&pacientId=${this.pacientId}`;
-    this.clipboardService.copyFromContent(url)
-    this.toastMessage.InfoMessage('Link para anamnese copiado com sucesso!')
   }
   handleSubmitReportAction(): void {
-    if (this.reportAction?.event?.action === this.editReportAction) this.handleSubmitEditReport()
-    if (this.reportAction?.event?.action === this.addReportAction) this.handleSubmitAddReport()
+    if (this.clienteAction?.event?.action === this.editClientAction) this.handleSubmitEditCliente()
+    if (this.clienteAction?.event?.action === this.addClienteAction) this.handleSubmitAddCliente()
   }
 
-  sendIntegrationWhatsApp(): void {
-    this.pacientService.getPacientById(this.pacientId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (pacientData: any) => {
-          const url = `http://localhost:4200/?token=${this.token}&pacientId=${this.pacientId}`;
-          const message = `Olá *${pacientData.username}*, aqui está o link para a anamnese:\n${url}`;
-          const encodedMessage = encodeURIComponent(message);
-          const whatsappLink = `https://api.whatsapp.com/send?phone=${encodeURIComponent(pacientData.phone)}&text=${encodedMessage}`;
-          window.open(whatsappLink, '_blank');
-        },
-        error: (err) => {
-          console.error(err);
-          this.toastMessage.ErrorMessage('Erro ao enviar o link via WhatsApp');
-        }
-      });
-  }
-  handleSubmitEditReport(): void {
+
+  handleSubmitEditCliente(): void {
     if (this.reportId <= 0) {
       console.error('ID do relatório inválido');
       return;
     }
-    const requestUpdateForm = this.reportForm.value as ReportRequest;
+    const requestUpdateForm = this.clienteForm.value as ReportRequest;
     console.log('Editar relatório:', requestUpdateForm);
 
     this.reportService.editReport(this.reportId, requestUpdateForm)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.reportForm.reset();
+          this.clienteForm.reset();
           this.toastMessage.SuccessMessage('Ficha editada com sucesso!');
         },
         error: (err) => {
           console.error(err);
-          this.reportForm.reset();
+          this.clienteForm.reset();
           this.toastMessage.ErrorMessage('Erro ao editar ficha');
         }
       });
   }
 
-  handleSubmitAddReport(): void {
-    var pacientId  = this.reportAction?.event?.id
-    if (this.reportForm?.value && this.reportForm?.valid && pacientId) {
-      const requestCreateForm = this.reportForm.value as  ReportRequest
+  handleSubmitAddCliente(): void {
+    var pacientId  = this.clienteAction?.event?.id
+    if (this.clienteForm?.value && this.clienteForm?.valid && pacientId) {
+      const requestCreateForm = this.clienteForm.value as  ReportRequest
       console.log('Adicionar relatório:', requestCreateForm)
       this.reportService.createReport(pacientId, requestCreateForm).pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response) => {
             if(response){
-              this.reportForm.reset();
+              this.clienteForm.reset();
               this.toastMessage.SuccessMessage('Ficha criada com sucesso!')
             }
           },
           error:(err) =>{
             console.log(err)
-            this.reportForm.reset();
+            this.clienteForm.reset();
             this.toastMessage.ErrorMessage('Erro ao criar ficha')
           }
         })
-      this.reportForm.reset();
+      this.clienteForm.reset();
     }
   }
 
 
   loadReportData(pacientId: number): void {
-    this.reportService.getReportByPacientId(pacientId, this.reportForm)
+    this.reportService.getReportByPacientId(pacientId, this.clienteForm)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (reportData: GetReportResponse) => {
