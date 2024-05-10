@@ -3,7 +3,7 @@ import {Subject, takeUntil} from "rxjs";
 import {DynamicDialogConfig} from "primeng/dynamicdialog";
 import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
 import {EmpresaEvent} from "../../../../../../models/interfaces/enums/pacients/PacientEvent";
-import {EditPacientAction} from "../../../../../../models/interfaces/pacients/event/editPacient";
+import {EditEmpresaAction} from "../../../../../../models/interfaces/pacients/event/editPacient";
 import {ToastMessage} from "../../../../../services/toast-message/toast-message";
 import {ConfirmationModal} from "../../../../../services/confirmation/confirmation-service.service";
 import {PacientService} from "../../../../../services/pacients/pacients.service";
@@ -28,7 +28,7 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
   public addEmpresaAction = EmpresaEvent.ADD_EMPRESA_ACTION;
   public editEmpresaAction = EmpresaEvent.EDIT_EMPRESA_ACTION;
   public showReportForm: boolean = false;
-  public empresaAction!: { event: EditPacientAction };
+  public empresaAction!: { event: EditEmpresaAction };
 
 
   public empresaForm = this.formBuilder.group({
