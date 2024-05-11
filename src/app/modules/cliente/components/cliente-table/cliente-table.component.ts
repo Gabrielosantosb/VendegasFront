@@ -8,6 +8,7 @@ import {
   DeleteReportAction
 } from "../../../../../models/interfaces/reports/event/DeleteProductAction";
 import {ReportsService} from "../../../../services/reports/reports.service";
+import {EditPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
 
 
 @Component({
@@ -18,6 +19,7 @@ import {ReportsService} from "../../../../services/reports/reports.service";
 export class ClienteTableComponent {
   @Input() clientes: Array<GetClienteResponse> = [];
   @Output() clienteEvent = new EventEmitter<EventAction>()
+  @Output() pedidoEvent = new EventEmitter<EditPedidoAction>()
   @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
 
   showProfissionalReports = false
@@ -40,18 +42,21 @@ export class ClienteTableComponent {
     });
   }
 
-  handleReportEvent(action: string, id?: number): void {
-    if (action && action !== '') this.clienteEvent.emit({action, id})
-  }
+
 
   openReportDetails(report: GetClienteResponse) {
     this.selectedCliente = report;
     this.displayModal = true;
   }
 
-  handleAddPedido(empresaId: number, clienteId: number, clienteName: string){
+  handleAddPedido(empresaId: number, clienteId: number, clienteNome: string){
     if(empresaId !==null && clienteId !== null){
-      console.log(empresaId, clienteId, clienteName)
+      console.log(empresaId, clienteId, clienteNome)
+      this.pedidoEvent.emit({
+        clienteId,
+        empresaId,
+        clienteNome,
+      })
     }
   }
 
