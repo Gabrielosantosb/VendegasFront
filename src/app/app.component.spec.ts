@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'controle-estoque'`, () => {
+  it(`should have as title 'vendergas-estoque'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('controle-estoque');
+    expect(app.title).toEqual('vendergas-estoque');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('controle-estoque app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('vendergas-estoque app is running!');
   });
 });

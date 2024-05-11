@@ -23,20 +23,24 @@ import {RouterModule} from "@angular/router";
 
 import {RippleModule} from "primeng/ripple";
 import {SharedModule} from "../../shared/shared.module";
-import {ProdutoFormComponent} from "./produto-form/produto-form.component";
+import {ProdutoTableComponent} from "./produto-table/produto-table.component";
+import {ProdutoHomeComponent} from "./produto-home/produto-home.component";
+import {PRODUTO_ROUTES} from "./produto.routing";
+
+
 
 
 @NgModule({
   declarations: [
-    // ClienteHomeComponent,
-    // ClienteTableComponent
+    ProdutoHomeComponent,
+    ProdutoTableComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    // RouterModule.forChild(CLIENTE_ROUTES),
+    RouterModule.forChild(PRODUTO_ROUTES),
     // PrimeNG
     CardModule,
     ButtonModule,
@@ -56,4 +60,4 @@ import {ProdutoFormComponent} from "./produto-form/produto-form.component";
   ],
   providers:[DialogService, ConfirmationService]
 })
-export class ClienteModule { }
+export class ProdutoModule { }

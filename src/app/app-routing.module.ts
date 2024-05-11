@@ -4,6 +4,7 @@ import {HomeComponent} from "./modules/home/home.component";
 import {AuthGuardService} from "./guards/auth-guard.service";
 import {NotfoundComponent} from "./comon-pages/notfound/notfound.component";
 import {ClienteHomeComponent} from "./modules/cliente/page/cliente-home/cliente-home.component";
+import {ProdutoTableComponent} from "./modules/produto/produto-table/produto-table.component";
 const routes: Routes = [
   {
     path : "",
@@ -14,7 +15,6 @@ const routes: Routes = [
     path : "home",
     component: HomeComponent,
   },
-
   {
     path : "dashboard",
     loadChildren: ()=> import('./modules/dashboard/dashboard.module')
@@ -26,6 +26,13 @@ const routes: Routes = [
     loadChildren: ()=> import('./modules/empresa/empresa.module')
       .then((m)=> m.EmpresaModule),
     canActivate:[AuthGuardService]
+  },
+  {
+    path: "produto",
+    loadChildren: () => import("./modules/produto/produto.module")
+      .then((m) => m.ProdutoModule),
+    canActivate: [AuthGuardService]
+
   },
   {
     path : "cliente",
