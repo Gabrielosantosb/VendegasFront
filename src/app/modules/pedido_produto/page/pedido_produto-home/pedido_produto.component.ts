@@ -1,22 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
 import {ReportsService} from "../../../../services/reports/reports.service";
-import {ReportsDataTransferService} from "../../../../shared/reports/reports-data-transfer.service";
-import {Router} from "@angular/router";
-import {
-  GetAllProductsResponse, GetClienteResponse,
-} from "../../../../../models/interfaces/reports/response/GetAllProductsResponse";
-import {ConfirmationService} from "primeng/api";
-import {EventAction} from "../../../../../models/interfaces/reports/event/EventAction";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ConfirmationModal} from "../../../../services/confirmation/confirmation-service.service";
-import {DeleteReportAction} from "../../../../../models/interfaces/reports/event/DeleteProductAction";
-import {ProdutoFormComponent} from "../../../produto/produto-form/produto-form.component";
 import {EditPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
-import {PedidoFormComponent} from "../../../pedido/pedido-form/pedido-form.component";
 import {PedidoService} from "../../../../services/pedido/pedido.service";
 import {PedidoResponse} from "../../../../../models/interfaces/pedido/PedidoResponse";
+import {ClienteFormComponent} from "../../../cliente/components/cliente-form/cliente-form.component";
+import {PedidoProdutoFormComponent} from "../../pedido_produto-form/pedido_produto-form.component";
 
 
 @Component({
@@ -25,7 +17,7 @@ import {PedidoResponse} from "../../../../../models/interfaces/pedido/PedidoResp
   styleUrls: [],
   providers: [ToastMessage, ConfirmationModal]
 })
-export class PedidoProdutoComponent implements OnDestroy, OnInit {
+export class PedidoProdutoHomeComponent implements OnDestroy, OnInit {
   private readonly destroy$: Subject<void> = new Subject();
   private ref!: DynamicDialogRef;
   public pedidosData : Array<PedidoResponse> = []
@@ -70,7 +62,7 @@ export class PedidoProdutoComponent implements OnDestroy, OnInit {
   handlePedidoAction(event :EditPedidoAction): void{
     console.log('Evento bateu' , event)
     if (event) {
-      this.ref = this.dialogService.open(PedidoFormComponent, {
+      this.ref = this.dialogService.open(PedidoProdutoFormComponent, {
         header: event?.action,
         width: '70%',
         contentStyle: {overflow: 'auto'},
@@ -93,35 +85,6 @@ export class PedidoProdutoComponent implements OnDestroy, OnInit {
     }
   }
 
-  handleDeleteClienteAction(event: DeleteReportAction): void {
-    console.log('ReportId', event?.reportId);
-    if (event) {
-      this.confirmationModal.confirmDelete(`Confirma a exclusão ?`, () => {
-        this.deleteCliente(event?.reportId);
-      });
-    } else {
-      this.toastMessage.ErrorMessage(`Não é possível excluir a ficha.`);
-
-    }
-  }
-  deleteCliente(reportId: number) {
-    console.log(reportId)
-    if (reportId) {
-      this.reportService
-        .deleteReport(reportId)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: () => {
-              this.getAllPedidos()
-              this.toastMessage.SuccessMessage('Cliente removido com sucesso!')
-          },
-          error: (err) => {
-            console.log(err);
-            this.toastMessage.ErrorMessage('Erro ao remover cliente!')
-          },
-        });
-    }
-  }
 
   ngOnDestroy(): void {
     this.destroy$.next();

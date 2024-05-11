@@ -19,7 +19,7 @@ import {DialogModule} from "primeng/dialog";
 import {ConfirmationService} from "primeng/api";
 import {RippleModule} from "primeng/ripple";
 import {SharedModule} from "../../shared/shared.module";
-import {PedidoProdutoComponent} from "./page/pedido_produto-home/pedido_produto.component";
+import {PedidoProdutoHomeComponent} from "./page/pedido_produto-home/pedido_produto.component";
 import {PEDIDO_ROUTES} from "./pedido_produto.routing";
 import {RouterModule} from "@angular/router";
 import {PedidoTableComponent} from "./pedido_produto-table/pedido_produto.component";
@@ -27,7 +27,7 @@ import {PedidoTableComponent} from "./pedido_produto-table/pedido_produto.compon
 
 @NgModule({
   declarations: [
-    PedidoProdutoComponent,
+    PedidoProdutoHomeComponent,
     PedidoTableComponent
   ],
   imports: [

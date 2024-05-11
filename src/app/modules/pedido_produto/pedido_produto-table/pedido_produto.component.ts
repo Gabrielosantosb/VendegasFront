@@ -6,6 +6,7 @@ import {DeleteReportAction} from "../../../../models/interfaces/reports/event/De
 import {PedidoEvent} from "../../../../models/interfaces/enums/pedido/PedidoEvent";
 import {ReportsService} from "../../../services/reports/reports.service";
 import {PedidoResponse} from "../../../../models/interfaces/pedido/PedidoResponse";
+import {FormBuilder, Validators} from "@angular/forms";
 
 
 
@@ -21,7 +22,13 @@ export class PedidoTableComponent implements OnInit{
   @Output() lancarPedidoEvent = new EventEmitter<LancarPedidoAction>()
   @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
 
+  public lancarPedidoForm = this.formBuilder.group({
 
+    quantidade: [0, Validators.required],
+    produto: [0, Validators.required],
+
+
+  })
 
 
   public addPedidoAction = PedidoEvent.ADD_PEDIDO_EVENT
@@ -29,7 +36,7 @@ export class PedidoTableComponent implements OnInit{
   public selectedPedido!: GetClienteResponse;
   displayModal: boolean = false;
 
-  constructor(private reportService: ReportsService) {
+  constructor(private reportService: ReportsService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -39,26 +46,13 @@ export class PedidoTableComponent implements OnInit{
 
 
   handleLancarPedido(pedidoId: number){
+    console.log(pedidoId)
     if( pedidoId !== null){
       this.lancarPedidoEvent.emit({
         pedidoId,
       })
     }
   }
-
-
-  handleAddPedido(action:string ,empresaId: number, clienteId: number, clienteNome: string){
-    if(empresaId !==null && clienteId !== null){
-      console.log(action, empresaId, clienteId, clienteNome)
-      this.pedidoEvent.emit({
-        action,
-        clienteId,
-        empresaId,
-        clienteNome,
-      })
-    }
-  }
-
 
 
 }

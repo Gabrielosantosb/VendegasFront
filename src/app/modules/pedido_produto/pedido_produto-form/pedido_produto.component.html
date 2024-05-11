@@ -1,0 +1,22 @@
+<div>
+  <form [formGroup]="clienteForm" >
+    <div  style="margin-bottom: 15px; text-align: center;">
+
+    <div class="card flex flex-column md:flex-column gap-3">
+      <textarea pInputText placeholder="Quantidade" formControlName="clienteName"></textarea>
+      <textarea pInputText placeholder="Produto" formControlName="email"></textarea>
+      <textarea pInputText placeholder="Telefone" formControlName="telefone"></textarea>
+
+
+        <p-button
+          [disabled]="!clienteForm.valid"
+          type="submit"
+          label="Concluir"
+        ></p-button>
+      </div>
+
+  </div>
+  </form>
+</div>
+
+

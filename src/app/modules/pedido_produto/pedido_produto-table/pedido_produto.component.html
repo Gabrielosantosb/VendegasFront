@@ -55,27 +55,45 @@
             <td>{{ pedido?.observacao }}</td>
             <td>{{ pedido?.empresa?.nomeFantasia }}</td>
             <td>
-              <div class='flex justify-content-center gap-3 align-content-center align-items-center' style="margin-bottom: 10px">
-                <button
-                  pButton
-                  pRipple
-                  pTooltip='Lançar pedido'
-                  tooltipPosition="top"
-                  icon='pi pi-arrow-up-right'
-                  class="p-button-outlined p-button-sucess"
-                  (click)="handleLancarPedido(pedido?.pedidoId) "
-                ></button>
+              <div class='flex justify-content-center gap-3 align-content-center align-items-center'
+                   style="margin-bottom: 10px">
+                <!-- Botão para abrir o modal -->
+                <button pButton pRipple pTooltip='Lançar pedido' tooltipPosition="top" icon='pi pi-arrow-up-right'
+                        class="p-button-outlined p-button-sucess" (click)="displayModal = true"></button>
               </div>
             </td>
           </tr>
         </ng-template>
       </p-table>
       <ng-template #noReports>
-        <div class="text-center">Nenhum cliente encontrada.</div>
+        <div class="text-center">Nenhum pedido encontrado.</div>
       </ng-template>
     </p-card>
   </div>
-  <p-confirmDialog></p-confirmDialog>
 
 
+  <!-- Modal para lançar pedido -->
+  <p-dialog header="Lançar Pedido" [(visible)]="displayModal" [modal]="true" [closable]="true">
+    <div class="modal-content">
+      <form [formGroup]="lancarPedidoForm">
+
+        <label>Quantidade:</label>
+        <div style="margin-bottom: 15px; text-align: center;">
+          <input pInputText type="number" placeholder="Quantidade" formControlName="quantidade"/>
+        </div>
+
+        <div class="form-group">
+          <label for="itemDropdown">Selecione um produto:</label>
+          <!-- Adicione a classe "custom-dropdown" para estilização personalizada -->
+          <p-dropdown optionLabel="nome" id="itemDropdown" formControlName='produto' [style]="{'width': '100%', 'height': '30px'}"
+                      class="custom-dropdown"></p-dropdown>
+        </div>
+
+        <div class="card flex flex-column md:flex-column gap-3 mt-3">
+          <button pButton type="button" label="Confirmar" class="p-button-outlined"></button>
+        </div>
+      </form>
+    </div>
+  </p-dialog>
 </div>
+<p-confirmDialog></p-confirmDialog>
