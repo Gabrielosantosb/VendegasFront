@@ -94,21 +94,6 @@ export class PedidoFormComponent implements OnInit, OnDestroy {
             this.toastMessage.ErrorMessage('Erro ao efetuar pedido')
           }
         })
-      // this.clienteService.createCliente(empresaId, requestCreateForm).pipe(takeUntil(this.destroy$))
-      //   .subscribe({
-      //     next: (response) => {
-      //       if(response){
-      //         this.clienteForm.reset();
-      //         this.toastMessage.SuccessMessage('Cliente criado com sucesso!')
-      //       }
-      //     },
-      //     error:(err) =>{
-      //       console.log(err)
-      //       this.clienteForm.reset();
-      //       this.toastMessage.ErrorMessage('Erro ao criar Cliente')
-      //     }
-      //   })
-      // this.clienteForm.reset();
     }
   }
 
