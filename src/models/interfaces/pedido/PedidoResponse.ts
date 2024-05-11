@@ -1,7 +1,9 @@
-export interface PedidoRequest
+export interface PedidoResponse
 {
-  produtoId: number,
-  nome: string,
-  valor: string,
-  descricao: string,
+  pedidoId: number,
+  numero: number,
+  observacao: string,
+  cliente: string,
+  data: string,
+  empresaId: number
 }

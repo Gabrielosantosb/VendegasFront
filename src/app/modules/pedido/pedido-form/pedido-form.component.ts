@@ -14,8 +14,8 @@ import {PedidoEvent} from "../../../../models/interfaces/enums/pedido/PedidoEven
 import {EditClienteAction} from "../../../../models/interfaces/reports/event/EditClienteAction";
 import {environments} from "../../../../environments/environments";
 import {ConfirmationModal} from "../../../services/confirmation/confirmation-service.service";
-import {PedidoRequest} from "../../../../models/interfaces/pedido/PedidoResponse";
 import {EditPedidoAction} from "../../../../models/interfaces/pedido/PedidoAction";
+import {PedidoRequest} from "../../../../models/interfaces/pedido/PedidoRequest";
 
 @Component({
   selector: 'app-cliente-form',
