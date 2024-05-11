@@ -19,6 +19,7 @@ import {EditProdutoAction} from "../../../../models/interfaces/produto/EditProdu
 import {environments} from "../../../../environments/environments";
 import {ConfirmationModal} from "../../../services/confirmation/confirmation-service.service";
 import {ProdutoRequest} from "../../../../models/interfaces/produto/request/ProdutoRequest";
+import {ProdutoService} from "../../../services/produto/produto.service";
 
 @Component({
   selector: 'app-cliente-form',
@@ -52,6 +53,7 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private toastMessage: ToastMessage,
     private cookie: CookieService,
+    private produtoService: ProdutoService
   ) {
   }
 
@@ -104,6 +106,19 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
     if (this.produtoForm?.value && this.produtoForm?.valid && empresaId) {
       const requestCreateProduto = this.produtoForm.value as  ProdutoRequest
       console.log('Adicionar produto:', requestCreateProduto)
+      this.produtoService.createProduto(empresaId, requestCreateProduto).pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next:(response) =>{
+            this.produtoForm.reset()
+            this.toastMessage.SuccessMessage("Produto criado com sucesso")
+          },
+          error: (err) =>{
+            console.log(err)
+            this.produtoForm.reset()
+            this.toastMessage.ErrorMessage("Erro ao criar produto")
+
+          }
+        })
       // this.clienteService.createCliente(empresaId, requestCreateProduto).pipe(takeUntil(this.destroy$))
       //   .subscribe({
       //     next: (response) => {
