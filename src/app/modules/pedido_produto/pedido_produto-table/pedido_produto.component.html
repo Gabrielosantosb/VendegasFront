@@ -74,7 +74,7 @@
 
   <!-- Modal para lançar pedido -->
   <p-dialog header="Lançar Pedido" [(visible)]="displayModal" [modal]="true" [closable]="true">
-    <div class="modal-content">
+    <div>
       <form [formGroup]="lancarPedidoForm">
 
         <label>Quantidade:</label>
@@ -82,15 +82,20 @@
           <input pInputText type="number" placeholder="Quantidade" formControlName="quantidade"/>
         </div>
 
+          <label for="produtoDropdown">Selecione um produto:</label>
         <div class="form-group">
-          <label for="itemDropdown">Selecione um produto:</label>
-          <!-- Adicione a classe "custom-dropdown" para estilização personalizada -->
-          <p-dropdown optionLabel="nome" id="itemDropdown" formControlName='produto' [style]="{'width': '100%', 'height': '30px'}"
-                      class="custom-dropdown"></p-dropdown>
+          <p-dropdown formControlName="produto" [options]="produtos" optionLabel="nome" id="produtoDropdown" [style]="{'width': '100%', 'height': '40px'}" [required] = "true"></p-dropdown>
+
         </div>
 
         <div class="card flex flex-column md:flex-column gap-3 mt-3">
-          <button pButton type="button" label="Confirmar" class="p-button-outlined"></button>
+
+          <p-button
+            [disabled]="!lancarPedidoForm.valid"
+            type="submit"
+            label="Concluir"
+          ></p-button>
+
         </div>
       </form>
     </div>

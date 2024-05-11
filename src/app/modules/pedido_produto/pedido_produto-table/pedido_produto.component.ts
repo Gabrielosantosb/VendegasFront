@@ -7,6 +7,8 @@ import {PedidoEvent} from "../../../../models/interfaces/enums/pedido/PedidoEven
 import {ReportsService} from "../../../services/reports/reports.service";
 import {PedidoResponse} from "../../../../models/interfaces/pedido/PedidoResponse";
 import {FormBuilder, Validators} from "@angular/forms";
+import {ProdutoService} from "../../../services/produto/produto.service";
+import {ProdutoResponse} from "../../../../models/interfaces/produto/response/ProdutoResponse";
 
 
 
@@ -23,11 +25,8 @@ export class PedidoTableComponent implements OnInit{
   @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
 
   public lancarPedidoForm = this.formBuilder.group({
-
-    quantidade: [0, Validators.required],
+    quantidade: [0, [Validators.required, Validators.min(0)]],
     produto: [0, Validators.required],
-
-
   })
 
 
@@ -36,23 +35,26 @@ export class PedidoTableComponent implements OnInit{
   public selectedPedido!: GetClienteResponse;
   displayModal: boolean = false;
 
-  constructor(private reportService: ReportsService, private formBuilder: FormBuilder) {
+  constructor(private produtoService: ProdutoService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-        console.log("AQIO A RESPONDE", this.pedidos)
+        this.getAllProdutos()
     }
 
-
-
-  handleLancarPedido(pedidoId: number){
-    console.log(pedidoId)
-    if( pedidoId !== null){
-      this.lancarPedidoEvent.emit({
-        pedidoId,
-      })
-    }
+   produtos: Array<ProdutoResponse> = [];
+  getAllProdutos(): void {
+    this.produtoService.getAllProdutos().subscribe({
+      next: (allProdutosData) => {
+        this.produtos = allProdutosData;
+        console.log(this.produtos)
+      },
+      error: (error) => {
+        console.error('Erro ao obter produtos:', error);
+      }
+    });
   }
+
 
 
 }
