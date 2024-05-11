@@ -13,6 +13,8 @@ import {ClienteFormComponent} from "../../components/cliente-form/cliente-form.c
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ConfirmationModal} from "../../../../services/confirmation/confirmation-service.service";
 import {DeleteReportAction} from "../../../../../models/interfaces/reports/event/DeleteProductAction";
+import {ProdutoFormComponent} from "../../../produto/produto-form/produto-form.component";
+import {EditPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
 
 
 @Component({
@@ -79,19 +81,44 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
       });
     }
   }
+  handlePedidoAction(event :EditPedidoAction): void{
+    console.log('Evento bateu' , event)
+    if (event) {
+      this.ref = this.dialogService.open(ProdutoFormComponent, {
+        header: event?.action,
+        width: '70%',
+        contentStyle: {overflow: 'auto'},
+        baseZIndex: 10000,
+        maximizable: true,
+        data: {
+          event:{
+            action : event.action,
+            empresaId: event.empresaId,
+            clienteId: event.clienteId,
+            clienteNome: event.clienteNome
+
+          }
+        },
+      });
+
+      this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
+        next: () => this.getAllClientes(),
+      });
+    }
+  }
 
   handleDeleteClienteAction(event: DeleteReportAction): void {
     console.log('ReportId', event?.reportId);
     if (event) {
-      this.confirmationModal.confirmDelete(`Confirma a exclusão da ficha de: ${event?.pacientName}?`, () => {
-        this.deleteReport(event?.reportId);
+      this.confirmationModal.confirmDelete(`Confirma a exclusão ?`, () => {
+        this.deleteCliente(event?.reportId);
       });
     } else {
       this.toastMessage.ErrorMessage(`Não é possível excluir a ficha.`);
 
     }
   }
-  deleteReport(reportId: number) {
+  deleteCliente(reportId: number) {
     console.log(reportId)
     if (reportId) {
       this.reportService

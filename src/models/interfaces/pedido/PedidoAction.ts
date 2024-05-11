@@ -1,5 +1,5 @@
 export interface EditPedidoAction{
-  action?: string
+  action: string
   clienteId?: number
   empresaId?:number
   clienteNome?: string

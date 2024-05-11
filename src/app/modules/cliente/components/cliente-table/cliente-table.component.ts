@@ -9,6 +9,9 @@ import {
 } from "../../../../../models/interfaces/reports/event/DeleteProductAction";
 import {ReportsService} from "../../../../services/reports/reports.service";
 import {EditPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
+import {ClienteEvent} from "../../../../../models/interfaces/enums/cliente/ClienteEvent";
+import {ProdutoEvent} from "../../../../../models/interfaces/enums/produto/ProdutoEvent";
+import {PedidoEvent} from "../../../../../models/interfaces/enums/pedido/PedidoEvent";
 
 
 @Component({
@@ -22,6 +25,10 @@ export class ClienteTableComponent {
   @Output() pedidoEvent = new EventEmitter<EditPedidoAction>()
   @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
 
+
+
+
+  public addPedidoAction = PedidoEvent.ADD_PEDIDO_EVENT
   showProfissionalReports = false
   public selectedCliente!: GetClienteResponse;
   displayModal: boolean = false;
@@ -49,10 +56,11 @@ export class ClienteTableComponent {
     this.displayModal = true;
   }
 
-  handleAddPedido(empresaId: number, clienteId: number, clienteNome: string){
+  handleAddPedido(action:string ,empresaId: number, clienteId: number, clienteNome: string){
     if(empresaId !==null && clienteId !== null){
-      console.log(empresaId, clienteId, clienteNome)
+      console.log(action, empresaId, clienteId, clienteNome)
       this.pedidoEvent.emit({
+        action,
         clienteId,
         empresaId,
         clienteNome,
