@@ -1,0 +1,20 @@
+<div>
+  <form [formGroup]="pedidoForm">
+    <div style="margin-bottom: 15px; text-align: center;">
+
+    <div class="card flex flex-column md:flex-column gap-3">
+      <textarea pInputText placeholder="Observação do pedido" formControlName="observacao"></textarea>
+
+
+        <p-button
+          [disabled]="!pedidoForm.valid"
+          type="submit"
+          label="Concluir"
+        ></p-button>
+      </div>
+
+  </div>
+  </form>
+</div>
+
+

@@ -19,11 +19,13 @@ import {CheckboxModule} from "primeng/checkbox";
 import {FileUploadModule} from "primeng/fileupload";
 import {TooltipModule} from "primeng/tooltip";
 import {ProdutoFormComponent} from "../modules/produto/produto-form/produto-form.component";
+import {PedidoFormComponent} from "../modules/pedido/pedido-form/pedido-form.component";
 @NgModule({
   declarations: [
     ToolbarNavigationComponent,
     ClienteFormComponent,
     ProdutoFormComponent,
+    PedidoFormComponent,
     ShortenPipe,
   ],
   imports: [

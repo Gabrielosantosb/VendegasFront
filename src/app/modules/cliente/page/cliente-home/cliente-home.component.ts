@@ -15,6 +15,7 @@ import {ConfirmationModal} from "../../../../services/confirmation/confirmation-
 import {DeleteReportAction} from "../../../../../models/interfaces/reports/event/DeleteProductAction";
 import {ProdutoFormComponent} from "../../../produto/produto-form/produto-form.component";
 import {EditPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
+import {PedidoFormComponent} from "../../../pedido/pedido-form/pedido-form.component";
 
 
 @Component({
@@ -84,7 +85,7 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
   handlePedidoAction(event :EditPedidoAction): void{
     console.log('Evento bateu' , event)
     if (event) {
-      this.ref = this.dialogService.open(ProdutoFormComponent, {
+      this.ref = this.dialogService.open(PedidoFormComponent, {
         header: event?.action,
         width: '70%',
         contentStyle: {overflow: 'auto'},
