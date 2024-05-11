@@ -31,10 +31,19 @@ export class PedidoService {
     )
   }
 
-  createPedido(empresaId: number, requestData : PedidoRequest): Observable<Array<PedidoResponse>> {
+  // createPedido(empresaId: number, requestData : PedidoRequest): Observable<Array<PedidoResponse>> {
+  //   console.log('Request:', requestData)
+  //   return this.http.post<Array<PedidoResponse>>(
+  //     `${this.API_URL}/api/Pedido/create-pedido/${empresaId}`,
+  //     requestData,
+  //     this.httpOptions
+  //   );
+  // }
+  createPedido(empresaId: number, observacao: string, cliente: string): Observable<Array<PedidoResponse>> {
+    var requestData = {empresaId, observacao, cliente}
     console.log('Request:', requestData)
     return this.http.post<Array<PedidoResponse>>(
-      `${this.API_URL}/api/Pedido/create-pedido/${empresaId}`,
+      `${this.API_URL}/api/Pedido/create-pedido/${requestData.empresaId}`,
       requestData,
       this.httpOptions
     );

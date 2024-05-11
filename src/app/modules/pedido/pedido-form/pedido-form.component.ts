@@ -16,6 +16,7 @@ import {environments} from "../../../../environments/environments";
 import {ConfirmationModal} from "../../../services/confirmation/confirmation-service.service";
 import {EditPedidoAction} from "../../../../models/interfaces/pedido/PedidoAction";
 import {PedidoRequest} from "../../../../models/interfaces/pedido/PedidoRequest";
+import {PedidoService} from "../../../services/pedido/pedido.service";
 
 @Component({
   selector: 'app-cliente-form',
@@ -44,12 +45,10 @@ export class PedidoFormComponent implements OnInit, OnDestroy {
   constructor(
     public ref: DynamicDialogConfig,
     private formBuilder: FormBuilder,
-
-
-    private confirmationModal: ConfirmationModal,
+    private pedidoService: PedidoService,
     private toastMessage: ToastMessage,
     private cookie: CookieService,
-    private clipboardService: ClipboardService,
+
   ) {
   }
 
@@ -68,40 +67,33 @@ export class PedidoFormComponent implements OnInit, OnDestroy {
 
   }
   handleSubmitPedidoAction(): void {
-    if (this.pedidoAction?.event?.action === this.editPedidoAction) this.handleSubmitEditPedido()
     if (this.pedidoAction?.event?.action === this.addPedidoAction) this.handleSubmitAddPedido()
   }
 
 
-
-  handleSubmitEditPedido(): void {
-    if (this.reportId <= 0) {
-      console.error('ID do relatório inválido');
-      return;
-    }
-    const requestUpdateForm = this.pedidoForm.value as PedidoRequest;
-    console.log('Editar relatório:', requestUpdateForm);
-
-    // this.clienteService.editReport(this.reportId, requestUpdateForm)
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe({
-    //     next: () => {
-    //       this.clienteForm.reset();
-    //       this.toastMessage.SuccessMessage('Ficha editada com sucesso!');
-    //     },
-    //     error: (err) => {
-    //       console.error(err);
-    //       this.clienteForm.reset();
-    //       this.toastMessage.ErrorMessage('Erro ao editar ficha');
-    //     }
-    //   });
-  }
-
   handleSubmitAddPedido(): void {
+    console.log('bateu aqui')
+
     var empresaId  = this.pedidoAction?.event?.empresaId
+    var clienteNome = this.pedidoAction?.event?.clienteNome as string;
+    var observacao = this.pedidoForm.value.observacao as string
+
     if (this.pedidoForm?.value && this.pedidoForm?.valid && empresaId) {
       const requestPedidoForm = this.pedidoForm.value
       console.log('Adicionar relatório:', requestPedidoForm)
+      this.pedidoService.createPedido(empresaId, observacao , clienteNome )
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (response)=>{
+            this.pedidoForm.reset();
+            this.toastMessage.SuccessMessage('Pedido efetuado com sucesso!')
+          },
+          error: (err) =>{
+            console.log(err)
+            this.pedidoForm.reset()
+            this.toastMessage.ErrorMessage('Erro ao efetuar pedido')
+          }
+        })
       // this.clienteService.createCliente(empresaId, requestCreateForm).pipe(takeUntil(this.destroy$))
       //   .subscribe({
       //     next: (response) => {
