@@ -10,6 +10,7 @@ import {EditClienteAction} from "../../../../../models/interfaces/reports/event/
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ReferralService} from "../../../../services/referral/referral.service";
 import {ClienteEvent} from "../../../../../models/interfaces/enums/cliente/ClienteEvent";
+import {EditProdutoAction} from "../../../../../models/interfaces/enums/produto/EditProdutoAction";
 
 @Component({
   selector: 'app-empresa-table',
@@ -22,6 +23,7 @@ export class EmpresaTableComponent implements OnInit{
 
   @Output() public empresaEvent = new EventEmitter<EditEmpresaAction>();
   @Output() public clienteEvent = new EventEmitter<EditClienteAction>();
+  @Output() public produtoEvent = new EventEmitter<EditProdutoAction>()
 
   public empresaSelected!: GetEmpresaResponse;
   public addEmpresaAction = EmpresaEvent.ADD_EMPRESA_ACTION;
@@ -53,6 +55,10 @@ export class EmpresaTableComponent implements OnInit{
   }
   handleClienteEvent(action: string, id?: number, clienteName?: string): void{
     if(action && action !== '') this.clienteEvent.emit({action, id, clienteName})
+  }
+
+  handleProdutoEvent(action: string, id?: number, produtoNome?: string): void{
+    if(action && action !== '') this.produtoEvent.emit({action, id, produtoNome})
   }
 
 
