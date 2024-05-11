@@ -57,6 +57,19 @@
             <td>
               <div class='flex justify-content-center gap-3 align-content-center align-items-center'
                    style="margin-bottom: 10px">
+
+                <button
+                  pButton
+                  pRipple
+                  pTooltip='Fazer um pedido'
+                  tooltipPosition="top"
+                  icon='pi pi-chart-line'
+                  class="p-button-outlined p-button-info"
+
+                  (click)="handleAddPedido(cliente?.empresa?.empresaId,
+                   cliente?.clienteId,
+                    cliente?.clienteName)"
+                ></button>
                 <button
                   pButton
                   pRipple

@@ -19,6 +19,7 @@ export class ClienteTableComponent {
   @Input() clientes: Array<GetClienteResponse> = [];
   @Output() clienteEvent = new EventEmitter<EventAction>()
   @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
+
   showProfissionalReports = false
   public selectedCliente!: GetClienteResponse;
   displayModal: boolean = false;
@@ -47,6 +48,13 @@ export class ClienteTableComponent {
     this.selectedCliente = report;
     this.displayModal = true;
   }
+
+  handleAddPedido(empresaId: number, clienteId: number, clienteName: string){
+    if(empresaId !==null && clienteId !== null){
+      console.log(empresaId, clienteId, clienteName)
+    }
+  }
+
   handleDeleteCliente(reportId: number, pacientName: string): void {
     if(reportId !== null && pacientName !== "")
     {
