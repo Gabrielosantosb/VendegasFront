@@ -71,7 +71,7 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
     }
 
   }
-  handleSubmitReportAction(): void {
+  handleSubmitClienteAction(): void {
     if (this.clienteAction?.event?.action === this.editClientAction) this.handleSubmitEditCliente()
     if (this.clienteAction?.event?.action === this.addClienteAction) this.handleSubmitAddCliente()
   }

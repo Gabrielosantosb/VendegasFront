@@ -15,6 +15,7 @@ import {EditClienteAction} from "../../../../models/interfaces/reports/event/Edi
 import {environments} from "../../../../environments/environments";
 import {ConfirmationModal} from "../../../services/confirmation/confirmation-service.service";
 import {PedidoRequest} from "../../../../models/interfaces/pedido/PedidoResponse";
+import {EditPedidoAction} from "../../../../models/interfaces/pedido/PedidoAction";
 
 @Component({
   selector: 'app-cliente-form',
@@ -27,9 +28,9 @@ export class PedidoFormComponent implements OnInit, OnDestroy {
   isLoading = false
   loadingMode: ProgressBarModule = 'indeterminate';
 
-  public addClienteAction = PedidoEvent.ADD_PEDIDO_EVENT
-  public editClientAction = PedidoEvent.EDIT_PEDIDO_EVENT;
-  public clienteAction !: { event: EditClienteAction }
+  public addPedidoAction = PedidoEvent.ADD_PEDIDO_EVENT
+  public editPedidoAction = PedidoEvent.EDIT_PEDIDO_EVENT;
+  public pedidoAction !: { event: EditPedidoAction }
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
   reportId = 0;
   pacientId = 0
@@ -53,26 +54,27 @@ export class PedidoFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.clienteAction = this.ref.data;
-    if(this.clienteAction.event.id  && this.clienteAction.event.action == this.addClienteAction)
+    this.pedidoAction = this.ref.data;
+    if(this.pedidoAction.event.empresaId  && this.pedidoAction.event.action == this.addPedidoAction)
     {
-      this.pacientId = this.clienteAction.event.id
+      this.pacientId = this.pedidoAction.event.empresaId
     }
 
-    if(this.clienteAction.event.action == this.editClientAction && this.clienteAction.event.id)
+    if(this.pedidoAction.event.action == this.editPedidoAction && this.pedidoAction.event.empresaId)
     {
       // this.loadReportData(this.clienteAction.event.id)
 
     }
 
   }
-  handleSubmitReportAction(): void {
-    if (this.clienteAction?.event?.action === this.editClientAction) this.handleSubmitEditCliente()
-    if (this.clienteAction?.event?.action === this.addClienteAction) this.handleSubmitAddCliente()
+  handleSubmitPedidoAction(): void {
+    if (this.pedidoAction?.event?.action === this.editPedidoAction) this.handleSubmitEditPedido()
+    if (this.pedidoAction?.event?.action === this.addPedidoAction) this.handleSubmitAddPedido()
   }
 
 
-  handleSubmitEditCliente(): void {
+
+  handleSubmitEditPedido(): void {
     if (this.reportId <= 0) {
       console.error('ID do relatório inválido');
       return;
@@ -95,11 +97,11 @@ export class PedidoFormComponent implements OnInit, OnDestroy {
     //   });
   }
 
-  handleSubmitAddCliente(): void {
-    var empresaId  = this.clienteAction?.event?.id
+  handleSubmitAddPedido(): void {
+    var empresaId  = this.pedidoAction?.event?.empresaId
     if (this.pedidoForm?.value && this.pedidoForm?.valid && empresaId) {
-      const requestCreateForm = this.pedidoForm.value as  PedidoRequest
-      console.log('Adicionar relatório:', requestCreateForm)
+      const requestPedidoForm = this.pedidoForm.value
+      console.log('Adicionar relatório:', requestPedidoForm)
       // this.clienteService.createCliente(empresaId, requestCreateForm).pipe(takeUntil(this.destroy$))
       //   .subscribe({
       //     next: (response) => {
