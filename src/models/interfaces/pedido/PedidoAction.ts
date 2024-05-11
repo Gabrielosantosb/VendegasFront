@@ -5,3 +5,10 @@ export interface EditPedidoAction{
   clienteNome?: string
 
 }
+
+export interface LancarPedidoAction{
+
+  produtoId?: number
+  pedidoId?:number
+  quantidade?: number
+}

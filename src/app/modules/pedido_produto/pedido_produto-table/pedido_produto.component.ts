@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GetClienteResponse} from "../../../../models/interfaces/reports/response/GetAllProductsResponse";
 import {EventAction} from "../../../../models/interfaces/reports/event/EventAction";
-import {EditPedidoAction} from "../../../../models/interfaces/pedido/PedidoAction";
+import {EditPedidoAction, LancarPedidoAction} from "../../../../models/interfaces/pedido/PedidoAction";
 import {DeleteReportAction} from "../../../../models/interfaces/reports/event/DeleteProductAction";
 import {PedidoEvent} from "../../../../models/interfaces/enums/pedido/PedidoEvent";
 import {ReportsService} from "../../../services/reports/reports.service";
@@ -18,6 +18,7 @@ export class PedidoTableComponent implements OnInit{
   @Input() pedidos: Array<PedidoResponse> = [];
   @Output() clienteEvent = new EventEmitter<EventAction>()
   @Output() pedidoEvent = new EventEmitter<EditPedidoAction>()
+  @Output() lancarPedidoEvent = new EventEmitter<LancarPedidoAction>()
   @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
 
 
@@ -37,11 +38,14 @@ export class PedidoTableComponent implements OnInit{
 
 
 
-
-  openReportDetails(report: GetClienteResponse) {
-    this.selectedPedido = report;
-    this.displayModal = true;
+  handleLancarPedido(pedidoId: number){
+    if( pedidoId !== null){
+      this.lancarPedidoEvent.emit({
+        pedidoId,
+      })
+    }
   }
+
 
   handleAddPedido(action:string ,empresaId: number, clienteId: number, clienteNome: string){
     if(empresaId !==null && clienteId !== null){
@@ -55,14 +59,6 @@ export class PedidoTableComponent implements OnInit{
     }
   }
 
-  handleDeleteCliente(reportId: number, pacientName: string): void {
-    if(reportId !== null && pacientName !== "")
-    {
-      this.deleteClienteEvent.emit({
-        reportId,
-        pacientName,
-      })
-    }
-  }
+
 
 }
