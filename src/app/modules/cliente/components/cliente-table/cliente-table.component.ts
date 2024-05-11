@@ -17,8 +17,8 @@ import {ReportsService} from "../../../../services/reports/reports.service";
 })
 export class ClienteTableComponent {
   @Input() clientes: Array<GetClienteResponse> = [];
-  @Output() reportEvent = new EventEmitter<EventAction>()
-  @Output() deleteReportEvent = new EventEmitter<DeleteReportAction>()
+  @Output() clienteEvent = new EventEmitter<EventAction>()
+  @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
   showProfissionalReports = false
   public selectedCliente!: GetClienteResponse;
   displayModal: boolean = false;
@@ -40,7 +40,7 @@ export class ClienteTableComponent {
   }
 
   handleReportEvent(action: string, id?: number): void {
-    if (action && action !== '') this.reportEvent.emit({action, id})
+    if (action && action !== '') this.clienteEvent.emit({action, id})
   }
 
   openReportDetails(report: GetClienteResponse) {
@@ -50,7 +50,7 @@ export class ClienteTableComponent {
   handleDeleteCliente(reportId: number, pacientName: string): void {
     if(reportId !== null && pacientName !== "")
     {
-      this.deleteReportEvent.emit({
+      this.deleteClienteEvent.emit({
         reportId,
         pacientName,
       })

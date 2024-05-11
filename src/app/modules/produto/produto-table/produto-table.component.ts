@@ -6,25 +6,24 @@ import {ProdutoService} from "../../../services/produto/produto.service";
 
 
 @Component({
-  selector: 'app-cliente-table',
+  selector: 'app-produto-table',
   templateUrl: './produto-table.component.html',
   styleUrls: ['report-table.scss']
 })
 export class ProdutoTableComponent {
   @Input() produtos: Array<ProdutoResponse> = [];
-  @Output() reportEvent = new EventEmitter<EventAction>()
-  showProfissionalReports = false
+  @Output() produtoEvent = new EventEmitter<EventAction>()
+
   public selectedProduto!: ProdutoResponse;
-  displayModal: boolean = false;
+
 
   constructor(private produtoService: ProdutoService) {
   }
 
 
-  handleShowAllReports(): void {
+  handleShowAllProdutos(): void {
     this.produtoService.getAllProdutos().subscribe({
       next: (allProdutosData) => {
-        this.showProfissionalReports = false
         this.produtos = allProdutosData;
       },
       error: (error) => {
@@ -33,8 +32,8 @@ export class ProdutoTableComponent {
     });
   }
 
-  handleReportEvent(action: string, id?: number): void {
-    if (action && action !== '') this.reportEvent.emit({action, id})
+  handleProdutoEvent(action: string, id?: number): void {
+    if (action && action !== '') this.produtoEvent.emit({action, id})
   }
 
   // handleDeleteCliente(reportId: number, pacientName: string): void {

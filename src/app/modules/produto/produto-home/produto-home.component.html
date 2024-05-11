@@ -2,7 +2,13 @@
 
 <app-toolbar-navigation></app-toolbar-navigation>
 
-<p>teste</p>
+<app-produto-table
+
+[produtos]="produtosData"
+(produtoEvent)="handleProdutoAction($event)"
+
+>
+</app-produto-table>
 <!--<app-cliente-table-->
 <!--  [clientes]="clientesData"-->
 <!--  (reportEvent)="handleReportAction($event)"-->

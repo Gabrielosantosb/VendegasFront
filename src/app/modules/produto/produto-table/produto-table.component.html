@@ -1,83 +1,83 @@
-<p>teste</p>
-<!--<div class='grid'>-->
-<!--  <div class='col-12'>-->
-<!--    <p-card class="shadow-3 m-5 text-indigo-800" styleClass="text-center" header="Clientes">-->
-<!--      <div class="flex flex-row justify-content-around " style="margin-bottom: 10px;">-->
-<!--      </div>-->
-<!--      <hr style="border: 1px solid #ccc; width: 100%; margin-bottom: 20px;">-->
-<!--      <p-table-->
-<!--        [value]="produtos"-->
-<!--        [(selection)]="selectedProduto"-->
-<!--        [rows]="10"-->
-<!--        [paginator]="true"-->
-<!--        [responsive]="true"-->
-<!--        [tableStyle]="{'min-width': '75rem' }"-->
-<!--        [rowHover]='true'-->
-<!--        [showCurrentPageReport]='true'-->
-<!--        dataKey="id"-->
-<!--        currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} produtos"-->
-<!--      >-->
-<!--        <ng-template pTemplate="header">-->
-<!--          <tr>-->
-<!--            <th pSortableColumn="reportDateTime">-->
-<!--              <div class='flex justify-content-between align-items-center'>-->
-<!--                Nome do cliente-->
-<!--              </div>-->
-<!--            </th>-->
-<!--            <th pSortableColumn="email">-->
-<!--              Email-->
-<!--            </th>-->
-<!--            <th pSortableColumn="telefone">-->
-<!--              Telefone-->
-<!--            </th>-->
-<!--            <th pSortableColumn="empresa">-->
-<!--              Nome da empresa-->
 
-<!--              <p-columnFilter-->
-<!--                type="text"-->
-<!--                field='empresa.nomeFantasia'-->
-<!--                display="menu"-->
-<!--                matchMode="contains"-->
-<!--                [showMatchModes]='false'-->
-<!--                [showAddButton]="false"-->
-<!--                [showOperator]="false"-->
-<!--              ></p-columnFilter>-->
-<!--            </th>-->
+<div class='grid'>
+  <div class='col-12'>
+    <p-card class="shadow-3 m-5 text-indigo-800" styleClass="text-center" header="Produtos">
+      <div class="flex flex-row justify-content-around " style="margin-bottom: 10px;">
+      </div>
+      <hr style="border: 1px solid #ccc; width: 100%; margin-bottom: 20px;">
+      <p-table
+        [value]="produtos"
+        [(selection)]="selectedProduto"
+        [rows]="10"
+        [paginator]="true"
+        [responsive]="true"
+        [tableStyle]="{'min-width': '75rem' }"
+        [rowHover]='true'
+        [showCurrentPageReport]='true'
+        dataKey="id"
+        currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} produtos"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="reportDateTime">
+              <div class='flex justify-content-between align-items-center'>
+                Nome do produto
+              </div>
+            </th>
+            <th pSortableColumn="email">
+              Valor
+            </th>
+            <th pSortableColumn="telefone">
+              Descrição
+            </th>
+            <th pSortableColumn="empresa">
+              Nome da empresa
 
-<!--            <th>-->
-<!--            </th>-->
-<!--          </tr>-->
-<!--        </ng-template>-->
-<!--        <ng-template pTemplate="body" let-produto>-->
-<!--          <tr>-->
-<!--            <td>{{ produto?.clienteName }}</td>-->
-<!--            <td>{{ produto?.email }}</td>-->
-<!--            <td>{{ produto?.telefone }}</td>-->
-<!--            <td>{{ produto?.empresa.nomeFantasia }}</td>-->
+              <p-columnFilter
+                type="text"
+                field='empresa.nomeFantasia'
+                display="menu"
+                matchMode="contains"
+                [showMatchModes]='false'
+                [showAddButton]="false"
+                [showOperator]="false"
+              ></p-columnFilter>
+            </th>
 
-<!--            <td>-->
-<!--              <div class='flex justify-content-center gap-3 align-content-center align-items-center'-->
-<!--                   style="margin-bottom: 10px">-->
-<!--                <button-->
-<!--                  pButton-->
-<!--                  pRipple-->
-<!--                  pTooltip='Excluir cliente'-->
-<!--                  tooltipPosition="top"-->
-<!--                  icon='pi pi-trash'-->
-<!--                  class="p-button-outlined p-button-danger"-->
+            <th>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-produto>
+          <tr>
+            <td>{{ produto?.nome }}</td>
+            <td>{{ produto?.valor }}</td>
+            <td>{{ produto?.descricao }}</td>
+            <td>{{ produto?.empresa.nomeFantasia }}</td>
 
-<!--                ></button>-->
-<!--              </div>-->
-<!--            </td>-->
-<!--          </tr>-->
-<!--        </ng-template>-->
-<!--      </p-table>-->
-<!--      <ng-template #noProduto>-->
-<!--        <div class="text-center">Nenhum produto encontrada.</div>-->
-<!--      </ng-template>-->
-<!--    </p-card>-->
-<!--  </div>-->
-<!--  <p-confirmDialog></p-confirmDialog>-->
+            <td>
+              <div class='flex justify-content-center gap-3 align-content-center align-items-center'
+                   style="margin-bottom: 10px">
+                <button
+                  pButton
+                  pRipple
+                  pTooltip='Excluir produto'
+                  tooltipPosition="top"
+                  icon='pi pi-trash'
+                  class="p-button-outlined p-button-danger"
+
+                ></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <ng-template #noProduto>
+        <div class="text-center">Nenhum produto encontrada.</div>
+      </ng-template>
+    </p-card>
+  </div>
+  <p-confirmDialog></p-confirmDialog>
 
 
-<!--</div>-->
+</div>

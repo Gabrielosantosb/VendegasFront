@@ -60,26 +60,8 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
       })
   }
 
-  getAPIProductsDatas() {
-    // this.reportService
-    //   .getAllProducts()
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe({
-    //     next: (response) => {
-    //       if (response.length > 0) {
-    //         this.productsDatas = response;
-    //         this.productsDtService.setProductsDatas(response);
-    //       }
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //       this.toastMessage.ErrorMessage("Erro ao buscar produtos")
-    //       this.router.navigate(['/dashboard']);
-    //     },
-    //   });
-  }
 
-  handleReportAction(event: EventAction): void {
+  handleClienteAction(event: EventAction): void {
     if (event) {
       this.ref = this.dialogService.open(ClienteFormComponent, {
         header: event?.action,
@@ -98,7 +80,7 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
     }
   }
 
-  handleDeleteReportAction(event: DeleteReportAction): void {
+  handleDeleteClienteAction(event: DeleteReportAction): void {
     console.log('ReportId', event?.reportId);
     if (event) {
       this.confirmationModal.confirmDelete(`Confirma a exclusão da ficha de: ${event?.pacientName}?`, () => {
