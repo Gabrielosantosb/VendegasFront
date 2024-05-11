@@ -110,13 +110,13 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
           next: (response) => {
             if(response){
               this.clienteForm.reset();
-              this.toastMessage.SuccessMessage('Ficha criada com sucesso!')
+              this.toastMessage.SuccessMessage('Cliente criado com sucesso!')
             }
           },
           error:(err) =>{
             console.log(err)
             this.clienteForm.reset();
-            this.toastMessage.ErrorMessage('Erro ao criar ficha')
+            this.toastMessage.ErrorMessage('Erro ao criar Cliente')
           }
         })
       this.clienteForm.reset();

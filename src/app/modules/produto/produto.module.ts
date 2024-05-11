@@ -23,19 +23,20 @@ import {RouterModule} from "@angular/router";
 
 import {RippleModule} from "primeng/ripple";
 import {SharedModule} from "../../shared/shared.module";
+import {ProdutoFormComponent} from "./produto-form/produto-form.component";
 
 
 @NgModule({
   declarations: [
-    ClienteHomeComponent,
-    ClienteTableComponent
+    // ClienteHomeComponent,
+    // ClienteTableComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forChild(CLIENTE_ROUTES),
+    // RouterModule.forChild(CLIENTE_ROUTES),
     // PrimeNG
     CardModule,
     ButtonModule,

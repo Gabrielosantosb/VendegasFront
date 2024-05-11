@@ -33,12 +33,11 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
 
   public addProdutoAction = ProdutoEvent.ADD_PRODUTO_EVENT;
   public editProdutoAction = ProdutoEvent.EDIT_PRODUTO_EVENT;
-  public clienteAction !: { event: EditProdutoAction }
+  public produtoAction !: { event: EditProdutoAction }
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
   reportId = 0;
   pacientId = 0
   public produtoForm = this.formBuilder.group({
-
     nome: ['', Validators.required],
     valor: ['', Validators.required],
     descricao: ['', Validators.required]
@@ -51,30 +50,28 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
   constructor(
     public ref: DynamicDialogConfig,
     private formBuilder: FormBuilder,
-    private confirmationModal: ConfirmationModal,
     private toastMessage: ToastMessage,
     private cookie: CookieService,
-    private clipboardService: ClipboardService,
   ) {
   }
 
   ngOnInit(): void {
-    this.clienteAction = this.ref.data;
-    if(this.clienteAction.event.id  && this.clienteAction.event.action == this.addProdutoAction)
+    this.produtoAction = this.ref.data;
+    if(this.produtoAction.event.id  && this.produtoAction.event.action == this.addProdutoAction)
     {
-      this.pacientId = this.clienteAction.event.id
+      this.pacientId = this.produtoAction.event.id
     }
 
-    if(this.clienteAction.event.action == this.editProdutoAction && this.clienteAction.event.id)
+    if(this.produtoAction.event.action == this.editProdutoAction && this.produtoAction.event.id)
     {
       // this.loadReportData(this.clienteAction.event.id)
 
     }
 
   }
-  handleSubmitReportAction(): void {
-    if (this.clienteAction?.event?.action === this.editProdutoAction) this.handleSubmitEditProduto()
-    if (this.clienteAction?.event?.action === this.addProdutoAction) this.handleSubmitAddProduto()
+  handleSubmitProdutoAction(): void {
+    if (this.produtoAction?.event?.action === this.editProdutoAction) this.handleSubmitEditProduto()
+    if (this.produtoAction?.event?.action === this.addProdutoAction) this.handleSubmitAddProduto()
   }
 
 
@@ -102,7 +99,8 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
   }
 
   handleSubmitAddProduto(): void {
-    var empresaId  = this.clienteAction?.event?.id
+    var empresaId  = this.produtoAction?.event?.id
+    console.log('id da empresa:', empresaId)
     if (this.produtoForm?.value && this.produtoForm?.valid && empresaId) {
       const requestCreateProduto = this.produtoForm.value as  ProdutoRequest
       console.log('Adicionar produto:', requestCreateProduto)

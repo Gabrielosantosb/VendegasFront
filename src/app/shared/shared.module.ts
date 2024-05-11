@@ -18,10 +18,12 @@ import {SidebarModule} from "primeng/sidebar";
 import {CheckboxModule} from "primeng/checkbox";
 import {FileUploadModule} from "primeng/fileupload";
 import {TooltipModule} from "primeng/tooltip";
+import {ProdutoFormComponent} from "../modules/produto/produto-form/produto-form.component";
 @NgModule({
   declarations: [
     ToolbarNavigationComponent,
     ClienteFormComponent,
+    ProdutoFormComponent,
     ShortenPipe,
   ],
   imports: [

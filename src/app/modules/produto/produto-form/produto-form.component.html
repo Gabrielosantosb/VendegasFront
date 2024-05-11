@@ -1,5 +1,22 @@
 <div>
-<p>teste</p>
+  <form [formGroup]="produtoForm" (ngSubmit)="handleSubmitProdutoAction()">
+    <div style="margin-bottom: 15px; text-align: center;">
+
+      <div class="card flex flex-column md:flex-column gap-3">
+        <textarea pInputText placeholder="Nome do produto" formControlName="nome"></textarea>
+        <textarea pInputText placeholder="Valor" formControlName="valor"></textarea>
+        <textarea pInputText placeholder="Descrição" formControlName="descricao"></textarea>
+
+
+        <p-button
+          [disabled]="!produtoForm.valid"
+          type="submit"
+          label="Concluir"
+        ></p-button>
+      </div>
+
+    </div>
+  </form>
 </div>
 
 

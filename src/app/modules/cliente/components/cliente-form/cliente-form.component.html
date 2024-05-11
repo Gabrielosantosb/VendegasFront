@@ -1,7 +1,7 @@
 <div>
-  <form [formGroup]="clienteForm" (ngSubmit)="handleSubmitReportAction()"><div *ngIf="clienteAction.event.action == addClienteAction" style="margin-bottom: 15px; text-align: center;">
+  <form [formGroup]="clienteForm" (ngSubmit)="handleSubmitReportAction()">
+    <div *ngIf="clienteAction.event.action == addClienteAction" style="margin-bottom: 15px; text-align: center;">
 
-  </div>
     <div class="card flex flex-column md:flex-column gap-3">
       <textarea pInputText placeholder="Nome do cliente" formControlName="clienteName"></textarea>
       <textarea pInputText placeholder="Email" formControlName="email"></textarea>
@@ -15,6 +15,7 @@
         ></p-button>
       </div>
 
+  </div>
   </form>
 </div>
 
