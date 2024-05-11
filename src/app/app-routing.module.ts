@@ -41,6 +41,12 @@ const routes: Routes = [
     canActivate:[AuthGuardService]
   },
   {
+    path : "pedidos",
+    loadChildren: ()=> import('./modules/pedido_produto/pedido_produto.module')
+      .then((m)=> m.PedidoProdutoModule),
+    canActivate:[AuthGuardService]
+  },
+  {
     path: "404",
     loadChildren:() => import('../app/comon-pages/notfound/not-found.module')
       .then((m) => m.NotFoundModule),
