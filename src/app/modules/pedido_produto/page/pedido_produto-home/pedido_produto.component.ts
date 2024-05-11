@@ -15,6 +15,8 @@ import {DeleteReportAction} from "../../../../../models/interfaces/reports/event
 import {ProdutoFormComponent} from "../../../produto/produto-form/produto-form.component";
 import {EditPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
 import {PedidoFormComponent} from "../../../pedido/pedido-form/pedido-form.component";
+import {PedidoService} from "../../../../services/pedido/pedido.service";
+import {PedidoResponse} from "../../../../../models/interfaces/pedido/PedidoResponse";
 
 
 @Component({
@@ -26,11 +28,12 @@ import {PedidoFormComponent} from "../../../pedido/pedido-form/pedido-form.compo
 export class PedidoProdutoComponent implements OnDestroy, OnInit {
   private readonly destroy$: Subject<void> = new Subject();
   private ref!: DynamicDialogRef;
-  public clientesData : Array<GetClienteResponse> = []
+  public pedidosData : Array<PedidoResponse> = []
   isLoading = false
 
   constructor(
     private reportService: ReportsService,
+    private pedidoService: PedidoService,
     private dialogService: DialogService,
     private toastMessage: ToastMessage,
     private confirmationModal: ConfirmationModal
@@ -38,26 +41,27 @@ export class PedidoProdutoComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllClientes();
+    this.getAllPedidos();
   }
 
 
 
-  getAllClientes(){
+  getAllPedidos(){
     this.isLoading = true
-    this.reportService
-      .getAllClientes()
+    this.pedidoService
+      .getAllPedidoss()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (response: GetClienteResponse[]) =>{
+        next: (response) =>{
           if(response){
-            this.clientesData = response
+            this.pedidosData = response
             this.isLoading = false
+            console.log(this.pedidosData)
           }
         },
         error:(err:Error) =>{
           console.log(err)
-          this.toastMessage.ErrorMessage("Erro ao buscar clientes")
+          this.toastMessage.ErrorMessage("Erro ao buscar pedidos")
         }
       })
   }
@@ -84,7 +88,7 @@ export class PedidoProdutoComponent implements OnDestroy, OnInit {
       });
 
       this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
-        next: () => this.getAllClientes(),
+        next: () => this.getAllPedidos(),
       });
     }
   }
@@ -108,7 +112,7 @@ export class PedidoProdutoComponent implements OnDestroy, OnInit {
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: () => {
-              this.getAllClientes()
+              this.getAllPedidos()
               this.toastMessage.SuccessMessage('Cliente removido com sucesso!')
           },
           error: (err) => {

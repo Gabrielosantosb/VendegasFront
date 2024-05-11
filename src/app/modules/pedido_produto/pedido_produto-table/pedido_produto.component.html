@@ -1,0 +1,90 @@
+<div class='grid'>
+  <div class='col-12'>
+    <p-card class="shadow-3 m-5 text-indigo-800" styleClass="text-center" header="Pedidos">
+      <div class="flex flex-row justify-content-around " style="margin-bottom: 10px;">
+      </div>
+      <hr style="border: 1px solid #ccc; width: 100%; margin-bottom: 20px;">
+      <p-table
+        [value]="pedidos"
+        [(selection)]="selectedPedido"
+        [rows]="10"
+        [paginator]="true"
+        [responsive]="true"
+        [tableStyle]="{'min-width': '75rem' }"
+        [rowHover]='true'
+        [showCurrentPageReport]='true'
+        dataKey="id"
+        currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} pedidos"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="reportDateTime">
+              <div class='flex justify-content-between align-items-center'>
+                Número do pedido
+              </div>
+            </th>
+            <th pSortableColumn="cliente">
+              Cliente
+            </th>
+            <th pSortableColumn="observacao">
+              Observação
+            </th>
+            <th pSortableColumn="empresa">
+              Nome da empresa
+
+              <p-columnFilter
+                type="text"
+                field='empresa.nomeFantasia'
+                display="menu"
+                matchMode="contains"
+                [showMatchModes]='false'
+                [showAddButton]="false"
+                [showOperator]="false"
+              ></p-columnFilter>
+            </th>
+
+            <th>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pedido>
+          <tr>
+
+            <td>{{ pedido?.numero }}</td>
+            <td>{{ pedido?.cliente }}</td>
+            <td>{{ pedido?.observacao }}</td>
+            <td>{{ pedido?.empresa?.nomeFantasia }}</td>
+            <td>
+              <div class='flex justify-content-center gap-3 align-content-center align-items-center' style="margin-bottom: 10px">
+                <button
+                  pButton
+                  pRipple
+                  pTooltip='Fazer um pedido'
+                  tooltipPosition="top"
+                  icon='pi pi-chart-line'
+                  class="p-button-outlined p-button-info"
+                  (click)="handleAddPedido(addPedidoAction, pedido?.empresa?.empresaId, pedido?.clienteId, pedido?.clienteName)"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  pTooltip='Excluir cliente'
+                  tooltipPosition="top"
+                  icon='pi pi-trash'
+                  class="p-button-outlined p-button-danger"
+                  (click)="handleDeleteCliente(pedido?.clienteId, pedido?.clienteName)"
+                ></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <ng-template #noReports>
+        <div class="text-center">Nenhum cliente encontrada.</div>
+      </ng-template>
+    </p-card>
+  </div>
+  <p-confirmDialog></p-confirmDialog>
+
+
+</div>

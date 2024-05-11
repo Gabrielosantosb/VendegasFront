@@ -37,18 +37,6 @@ export class ClienteTableComponent {
   }
 
 
-  handleShowAllReports(): void {
-    this.reportService.getAllClientes().subscribe({
-      next: (allReportData) => {
-        this.showProfissionalReports = false
-        this.clientes = allReportData;
-      },
-      error: (error) => {
-        console.error('Erro ao obter fichas do usuário:', error);
-      }
-    });
-  }
-
 
 
   openReportDetails(report: GetClienteResponse) {

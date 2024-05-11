@@ -22,11 +22,13 @@ import {SharedModule} from "../../shared/shared.module";
 import {PedidoProdutoComponent} from "./page/pedido_produto-home/pedido_produto.component";
 import {PEDIDO_ROUTES} from "./pedido_produto.routing";
 import {RouterModule} from "@angular/router";
+import {PedidoTableComponent} from "./pedido_produto-table/pedido_produto.component";
 
 
 @NgModule({
   declarations: [
-    PedidoProdutoComponent
+    PedidoProdutoComponent,
+    PedidoTableComponent
   ],
   imports: [
     CommonModule,
