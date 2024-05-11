@@ -10,7 +10,7 @@ import {ReportsService} from "../../../../services/reports/reports.service";
 import {ClienteEvent} from "../../../../../models/interfaces/enums/cliente/ClienteEvent";
 import {EditClienteAction} from "../../../../../models/interfaces/reports/event/EditClienteAction";
 import {
-  GetClienteResponse,
+
   ClienteRequest
 } from "../../../../../models/interfaces/reports/response/GetAllProductsResponse";
 import {CookieService} from "ngx-cookie-service";

@@ -14,6 +14,7 @@ import {EmpresaFormComponent} from "../../components/empresa-form/empresa-form/e
 
 import {ProgressBarModule} from "primeng/progressbar";
 import {ClienteFormComponent} from "../../../cliente/components/cliente-form/cliente-form.component";
+import {ProdutoFormComponent} from "../../../produto/produto-form/produto-form.component";
 
 @Component({
   selector: 'app-empresa-home',
@@ -64,6 +65,28 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
   }
 
 
+  handleProdutoAction(event :EventAction): void{
+    console.log('Evento bateu' , event)
+    if (event) {
+      this.ref = this.dialogService.open(ProdutoFormComponent, {
+        header: event?.action,
+        width: '70%',
+        contentStyle: {overflow: 'auto'},
+        baseZIndex: 10000,
+        maximizable: true,
+        data: {
+          event:{
+            action : event.action,
+            id: event.id
+          }
+        },
+      });
+
+      this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
+        next: () => this.getAllEmpresas(),
+      });
+    }
+  }
   handleClienteAction(event :EventAction): void{
     console.log('Evento bateu' , event)
     if (event) {
@@ -86,7 +109,7 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
       });
     }
   }
-  handlePacientAction(event: EventAction): void {
+  handleEmpresaAction(event: EventAction): void {
     if (event) {
       this.ref = this.dialogService.open(EmpresaFormComponent, {
         header: event?.action,

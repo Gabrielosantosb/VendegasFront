@@ -6,8 +6,9 @@
 
 <app-empresa-table
   [empresa]="empresasData"
-  (empresaEvent)="handlePacientAction($event)"
+  (empresaEvent)="handleEmpresaAction($event)"
   (clienteEvent)="handleClienteAction($event)"
+  (produtoEvent)="handleProdutoAction($event)"
 
 ></app-empresa-table>
 

@@ -10,7 +10,8 @@ import {EditClienteAction} from "../../../../../models/interfaces/reports/event/
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ReferralService} from "../../../../services/referral/referral.service";
 import {ClienteEvent} from "../../../../../models/interfaces/enums/cliente/ClienteEvent";
-import {EditProdutoAction} from "../../../../../models/interfaces/enums/produto/EditProdutoAction";
+import {EditProdutoAction} from "../../../../../models/interfaces/produto/EditProdutoAction";
+import {ProdutoEvent} from "../../../../../models/interfaces/enums/produto/ProdutoEvent";
 
 @Component({
   selector: 'app-empresa-table',
@@ -30,6 +31,8 @@ export class EmpresaTableComponent implements OnInit{
   public editPacientAction = EmpresaEvent.EDIT_EMPRESA_ACTION;
 
   public addClienteAction = ClienteEvent.ADD_CLIENTE_EVENT;
+
+  public addProdutoAction = ProdutoEvent.ADD_PRODUTO_EVENT;
 
 
 
