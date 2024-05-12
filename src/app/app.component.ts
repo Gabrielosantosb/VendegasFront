@@ -8,7 +8,7 @@ import {PrimeNGConfig} from 'primeng/api';
 })
 
 export class AppComponent implements OnInit {
-  title = 'controle-estoque';
+  title = 'verndergas-estoque';
 
   constructor(private primengConfig: PrimeNGConfig) {
   }
