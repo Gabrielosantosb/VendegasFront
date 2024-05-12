@@ -18,7 +18,6 @@ export class ProdutoTableComponent {
   @Input() produtos: Array<ProdutoResponse> = [];
   @Output() produtoEvent = new EventEmitter<EventAction>()
   public selectedProduto!: ProdutoResponse;
-  public deleteProdutoAction = ProdutoEvent.DELETE_PRODUTO_EVENT
 
 
   constructor(private produtoService: ProdutoService, private toastMessage: ToastMessage, private confirmationService: ConfirmationService) {
