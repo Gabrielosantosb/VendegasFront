@@ -6,6 +6,7 @@ import {DeleteReportAction} from "../../../../models/interfaces/reports/event/De
 import {PedidoEvent} from "../../../../models/interfaces/enums/pedido/PedidoEvent";
 import {ReportsService} from "../../../services/reports/reports.service";
 import {PedidoResponse} from "../../../../models/interfaces/pedido/PedidoResponse";
+import {PedidoService} from "../../../services/pedido/pedido.service";
 
 
 
@@ -17,19 +18,14 @@ import {PedidoResponse} from "../../../../models/interfaces/pedido/PedidoRespons
 export class PedidoTableComponent implements OnInit{
   @Input() pedidos: Array<PedidoResponse> = [];
   @Output() clienteEvent = new EventEmitter<EventAction>()
-  // @Output() pedidoEvent = new EventEmitter<EditPedidoAction>()
+
   @Output() lancarPedidoEvent = new EventEmitter<LancarPedidoAction>()
   @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
 
 
-
-
-  public addPedidoAction = PedidoEvent.ADD_PEDIDO_EVENT
-  showProfissionalReports = false
   public selectedPedido!: GetClienteResponse;
-  displayModal: boolean = false;
 
-  constructor(private reportService: ReportsService) {
+  constructor(private pedidoService: PedidoService) {
   }
 
   ngOnInit(): void {
@@ -48,17 +44,7 @@ export class PedidoTableComponent implements OnInit{
   }
 
 
-  // handleAddPedido(action:string ,empresaId: number, clienteId: number, clienteNome: string){
-  //   if(empresaId !==null && clienteId !== null){
-  //     console.log(action, empresaId, clienteId, clienteNome)
-  //     this.pedidoEvent.emit({
-  //       action,
-  //       clienteId,
-  //       empresaId,
-  //       clienteNome,
-  //     })
-  //   }
-  // }
+
 
 
 

@@ -14,6 +14,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {DynamicDialogConfig} from "primeng/dynamicdialog";
 import {ProdutoService} from "../../../services/produto/produto.service";
 import {ProdutoResponse} from "../../../../models/interfaces/produto/response/ProdutoResponse";
+import {PedidoService} from "../../../services/pedido/pedido.service";
 
 @Component({
   selector: 'app-cliente-form',
@@ -31,7 +32,7 @@ export class PedidoProdutoFormComponent implements OnInit, OnDestroy {
 
   public lancarPedidoForm = this.formBuilder.group({
     quantidade: [0, [Validators.required, Validators.min(1)]],
-    produto: ['', Validators.required],
+    produto: [null, Validators.required],
 
   })
   private token = this.cookie.get(this.USER_AUTH)
@@ -44,12 +45,13 @@ export class PedidoProdutoFormComponent implements OnInit, OnDestroy {
     private produtoService: ProdutoService,
     private toastMessage: ToastMessage,
     private cookie: CookieService,
+    private pedidoService: PedidoService,
     private clipboardService: ClipboardService,
   ) {
   }
 
   ngOnInit(): void {
-    this.clienteAction = this.ref.data;
+    this.getAllProdutos()
   }
 
   getAllProdutos(): void {
@@ -63,40 +65,37 @@ export class PedidoProdutoFormComponent implements OnInit, OnDestroy {
       }
     });
   }
-  handleSubmitClienteAction(): void {
-    // if (this.clienteAction?.event?.action === this.editClientAction) this.handleSubmitEditCliente()
-    // if (this.clienteAction?.event?.action === this.addClienteAction) this.handleSubmitAddCliente()
-  }
 
+  handleSubmitLancarPedido(): void {
+    console.log('Aqui o value ', this.lancarPedidoForm.value);
+    const selectedProduto = this.lancarPedidoForm.value.produto;
+    if (selectedProduto != null) {
+      if (typeof selectedProduto === 'object' && 'produtoId' in selectedProduto) {
+        const pedidoId = this.ref.data.event.pedidoId;
+        const produtoId = (selectedProduto as ProdutoResponse).produtoId;
+        const quantidade = this?.lancarPedidoForm?.value?.quantidade as number;
+        const requestLancarPedido = this.lancarPedidoForm?.value;
 
-
-
-  handleSubmitAddCliente(): void {
-    var empresaId  = this.clienteAction?.event?.id
-    if (this.lancarPedidoForm?.value && this.lancarPedidoForm?.valid && empresaId) {
-      // const requestCreateForm = this.clienteForm.value as  ClienteRequest
-      // console.log('Adicionar relatório:', requestCreateForm)
-      // this.clienteService.createCliente(empresaId, requestCreateForm).pipe(takeUntil(this.destroy$))
-      //   .subscribe({
-      //     next: (response) => {
-      //       if(response){
-      //         this.clienteForm.reset();
-      //         this.toastMessage.SuccessMessage('Cliente criado com sucesso!')
-      //       }
-      //     },
-      //     error:(err) =>{
-      //       console.log(err)
-      //       this.clienteForm.reset();
-      //       this.toastMessage.ErrorMessage('Erro ao criar Cliente')
-      //     }
-      //   })
-      // this.clienteForm.reset();
+        console.log("request", requestLancarPedido);
+        this.pedidoService.lancarPedido(pedidoId, produtoId, quantidade)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            next: (response) => {
+              this.lancarPedidoForm.reset();
+              this.toastMessage.SuccessMessage('Pedido lançado com sucesso');
+            },
+            error: (err) => {
+              if (err.status === 500) {
+                this.toastMessage.ErrorMessage('Pedido já lançado');
+              } else {
+                this.lancarPedidoForm.reset();
+                this.toastMessage.ErrorMessage('Erro ao lançar pedido');
+              }
+            }
+          });
+      }
     }
   }
-
-
-
-
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

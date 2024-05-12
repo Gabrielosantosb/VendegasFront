@@ -31,19 +31,30 @@ export class PedidoService {
     )
   }
 
-  // createPedido(empresaId: number, requestData : PedidoRequest): Observable<Array<PedidoResponse>> {
-  //   console.log('Request:', requestData)
-  //   return this.http.post<Array<PedidoResponse>>(
-  //     `${this.API_URL}/api/Pedido/create-pedido/${empresaId}`,
-  //     requestData,
-  //     this.httpOptions
-  //   );
-  // }
   createPedido(empresaId: number, observacao: string, cliente: string): Observable<Array<PedidoResponse>> {
     var requestData = {empresaId, observacao, cliente}
     console.log('Request:', requestData)
     return this.http.post<Array<PedidoResponse>>(
       `${this.API_URL}/api/Pedido/create-pedido/${requestData.empresaId}`,
+      requestData,
+      this.httpOptions
+    );
+  }
+
+  lancarPedido(pedidoId: number, produtoId: number, quantidade: number){
+    var requestData = {quantidade}
+    console.log('Request:', requestData)
+    return this.http.post(
+      `${this.API_URL}/api/PedidoProduto/create-produto-pedido/${pedidoId}/${produtoId}`,
+      requestData,
+      this.httpOptions
+    )
+
+  }
+  verificarPedidoExistente(pedidoId: number): Observable<boolean> {
+    const requestData = { pedidoId };
+    return this.http.post<boolean>(
+      `${this.API_URL}/api/Pedido/create-pedido/${requestData.pedidoId}`,
       requestData,
       this.httpOptions
     );
