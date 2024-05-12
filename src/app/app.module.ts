@@ -18,14 +18,13 @@ import {ToastMessage} from "./services/toast-message/toast-message";
 import {SharedModule} from "./shared/shared.module";
 import {ProgressBarModule} from "primeng/progressbar";
 import {ChartModule} from "primeng/chart";
-import { ReportDetailModalComponent } from './modal/report-detail-modal/report-detail-modal.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ReportDetailModalComponent,
   ],
     imports: [
         BrowserModule,

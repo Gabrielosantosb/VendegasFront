@@ -36,14 +36,5 @@ export class ProdutoTableComponent {
     if (action && action !== '') this.produtoEvent.emit({action, id})
   }
 
-  // handleDeleteCliente(reportId: number, pacientName: string): void {
-  //   if(reportId !== null && pacientName !== "")
-  //   {
-  //     this.deleteReportEvent.emit({
-  //       reportId,
-  //       pacientName,
-  //     })
-  //   }
-  // }
 
 }

@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
 import {DynamicDialogConfig} from "primeng/dynamicdialog";
-import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {EmpresaEvent} from "../../../../../../models/interfaces/enums/empresa/EmpresaEvent";
 import {EditEmpresaAction} from "../../../../../../models/interfaces/enums/empresa/EmpresaAction";
 import {ToastMessage} from "../../../../../services/toast-message/toast-message";
 import {ConfirmationModal} from "../../../../../services/confirmation/confirmation-service.service";
 import {EmpresaService} from "../../../../../services/empresa/empresa.service";
-import {ProgressBar, ProgressBarModule} from "primeng/progressbar";
+import {ProgressBarModule} from "primeng/progressbar";
 import {
   AddEmpresaRequest,
   EditEmpresaRequest, GetEmpresaResponse,
@@ -51,26 +51,26 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
     console.log('bateu aqui', this.ref.data)
     this.empresaAction = this.ref.data;
     if (this.empresaAction?.event?.action === this.editEmpresaAction && this.empresaAction?.event?.id !== undefined) {
-      this.loadPacientData(this.empresaAction.event.id);
+      this.loadEmpresaData(this.empresaAction.event.id);
     }
   }
 
-  loadPacientData(pacientId: number): void {
-    console.log('bateu aqui2')
-    this.empresaService.getPacientById(pacientId)
+  loadEmpresaData(empresaId: number): void {
+
+    this.empresaService.getEmpresaById(empresaId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (pacientData: GetEmpresaResponse) => {
-          console.log('Dados da emprsa carregados:', pacientData);
+        next: (empresaData: GetEmpresaResponse) => {
+          console.log('Dados da emprsa carregados:', empresaData);
           this.empresaForm.patchValue({
-            nomeFantasia: pacientData.nomeFantasia,
-            razaoSocial: pacientData.razaoSocial,
-            cnpj: pacientData.cnpj,
+            nomeFantasia: empresaData.nomeFantasia,
+            razaoSocial: empresaData.razaoSocial,
+            cnpj: empresaData.cnpj,
           });
           this.showReportForm = true;
         },
         error: (error) => {
-          console.error('Erro ao carregar dados do paciente:', error);
+          console.error('Erro ao carregar dados da empresa:', error);
         }
       });
   }
@@ -123,12 +123,12 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
         .subscribe({
           next: () => {
             this.empresaForm.reset();
-            this.toastMessage.SuccessMessage('Paciente editada com sucesso!')
+            this.toastMessage.SuccessMessage('Empresa editada com sucesso!')
           },
           error: (err: any) => {
             console.log(err);
             this.empresaForm.reset();
-            this.toastMessage.ErrorMessage('Erro ao editar Paciente!')
+            this.toastMessage.ErrorMessage('Erro ao editar Empresa!')
           },
         });
     }

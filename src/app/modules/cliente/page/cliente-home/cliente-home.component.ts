@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
-import {ReportsService} from "../../../../services/reports/reports.service";
+import {ClienteService} from "../../../../services/clientes/cliente.service";
 
 import {EventAction} from "../../../../../models/interfaces/cliente/EventAction";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
@@ -28,10 +28,9 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
   isLoading = false
 
   constructor(
-    private reportService: ReportsService,
+    private reportService: ClienteService,
     private dialogService: DialogService,
     private toastMessage: ToastMessage,
-    private confirmationModal: ConfirmationModal
   ) {
   }
 

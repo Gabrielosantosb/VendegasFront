@@ -6,8 +6,6 @@ import {EditEmpresaAction} from "../../../../../models/interfaces/enums/empresa/
 import {EmpresaEvent} from "../../../../../models/interfaces/enums/empresa/EmpresaEvent";
 import {EmpresaService} from "../../../../services/empresa/empresa.service";
 import {EditClienteAction} from "../../../../../models/interfaces/cliente/EditClienteAction";
-import {ToastMessage} from "../../../../services/toast-message/toast-message";
-import {ReferralService} from "../../../../services/referral/referral.service";
 import {ClienteEvent} from "../../../../../models/interfaces/enums/cliente/ClienteEvent";
 import {EditProdutoAction} from "../../../../../models/interfaces/produto/EditProdutoAction";
 import {ProdutoEvent} from "../../../../../models/interfaces/enums/produto/ProdutoEvent";
@@ -26,7 +24,7 @@ export class EmpresaTableComponent implements OnInit{
 
   public empresaSelected!: GetEmpresaResponse;
   public addEmpresaAction = EmpresaEvent.ADD_EMPRESA_ACTION;
-  public editPacientAction = EmpresaEvent.EDIT_EMPRESA_ACTION;
+  public editEmpresaAction = EmpresaEvent.EDIT_EMPRESA_ACTION;
 
   public addClienteAction = ClienteEvent.ADD_CLIENTE_EVENT;
 

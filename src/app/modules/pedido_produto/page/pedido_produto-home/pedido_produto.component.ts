@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
-import {ReportsService} from "../../../../services/reports/reports.service";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ConfirmationModal} from "../../../../services/confirmation/confirmation-service.service";
@@ -23,11 +22,9 @@ export class PedidoProdutoComponent implements OnDestroy, OnInit {
   isLoading = false
 
   constructor(
-    private reportService: ReportsService,
     private pedidoService: PedidoService,
     private dialogService: DialogService,
     private toastMessage: ToastMessage,
-    private confirmationModal: ConfirmationModal
   ) {
   }
 

@@ -1,23 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
-
 import { FormBuilder, Validators} from "@angular/forms";
 import {DynamicDialogConfig} from "primeng/dynamicdialog";
-
 import {ProgressBarModule} from "primeng/progressbar";
-
-
-
-
-
 import {CookieService} from "ngx-cookie-service";
-
-import {ClipboardService} from "ngx-clipboard";
 import {ToastMessage} from "../../../services/toast-message/toast-message";
 import {ProdutoEvent} from "../../../../models/interfaces/enums/produto/ProdutoEvent";
 import {EditProdutoAction} from "../../../../models/interfaces/produto/EditProdutoAction";
 import {environments} from "../../../../environments/environments";
-import {ConfirmationModal} from "../../../services/confirmation/confirmation-service.service";
 import {ProdutoRequest} from "../../../../models/interfaces/produto/request/ProdutoRequest";
 import {ProdutoService} from "../../../services/produto/produto.service";
 
@@ -36,17 +26,14 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
   public editProdutoAction = ProdutoEvent.EDIT_PRODUTO_EVENT;
   public produtoAction !: { event: EditProdutoAction }
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
-  reportId = 0;
-  pacientId = 0
+  clienteId = 0;
+  empresaId = 0
   public produtoForm = this.formBuilder.group({
     nome: ['', Validators.required],
     valor: ['', Validators.required],
     descricao: ['', Validators.required]
 
   })
-  private token = this.cookie.get(this.USER_AUTH)
-
-
 
   constructor(
     public ref: DynamicDialogConfig,
@@ -61,12 +48,12 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
     this.produtoAction = this.ref.data;
     if(this.produtoAction.event.id  && this.produtoAction.event.action == this.addProdutoAction)
     {
-      this.pacientId = this.produtoAction.event.id
+      this.empresaId = this.produtoAction.event.id
     }
 
     if(this.produtoAction.event.action == this.editProdutoAction && this.produtoAction.event.id)
     {
-      // this.loadReportData(this.clienteAction.empresa.id)
+
 
     }
 
@@ -78,26 +65,12 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
 
 
   handleSubmitEditProduto(): void {
-    if (this.reportId <= 0) {
+    if (this.clienteId <= 0) {
       console.error('ID  nválido');
       return;
     }
     const requestUpdateForm = this.produtoForm.value as ProdutoRequest;
-    console.log('Editar relatório:', requestUpdateForm);
-
-    // this.clienteService.editReport(this.reportId, requestUpdateForm)
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe({
-    //     next: () => {
-    //       this.clienteForm.reset();
-    //       this.toastMessage.SuccessMessage('Ficha editada com sucesso!');
-    //     },
-    //     error: (err) => {
-    //       console.error(err);
-    //       this.clienteForm.reset();
-    //       this.toastMessage.ErrorMessage('Erro ao editar ficha');
-    //     }
-    //   });
+    console.log('Editar produto:', requestUpdateForm);
   }
 
   handleSubmitAddProduto(): void {
@@ -138,20 +111,6 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
   }
 
 
-  // loadReportData(pacientId: number): void {
-  //   this.clienteService.getReportByPacientId(pacientId, this.clienteForm)
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe({
-  //       next: (reportData: GetReportResponse) => {
-  //         this.reportId = reportData.reportId
-  //         console.log('Dados ficha carregados:', reportData);
-  //
-  //       },
-  //       error: (error) => {
-  //         console.error('Erro ao  dados da ficha:', error);
-  //       }
-  //     });
-  // }
 
 
 

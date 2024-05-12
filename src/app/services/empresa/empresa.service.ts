@@ -2,13 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {environments} from "../../../environments/environments";
-import {Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 import {
   AddEmpresaRequest, EditEmpresaRequest,
   GetEmpresaResponse,
-
 } from "../../../models/interfaces/empresa/EmpresaModel";
-import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +34,7 @@ export class EmpresaService {
   }
 
 
-  getPacientById(empresaId: number): Observable<GetEmpresaResponse> {
+  getEmpresaById(empresaId: number): Observable<GetEmpresaResponse> {
     return this.http.get<GetEmpresaResponse>(
       `${this.API_URL}/api/Empresa/get-empresa/${empresaId}`,
       this.httpOptions
@@ -64,21 +62,6 @@ export class EmpresaService {
   }
 
 
-  deletePacient(requestData: { pacient_id: number }): Observable<void> {
-    return this.http.delete<void>(
-      `${this.API_URL}/api/Pacient/remove-pacient/${requestData.pacient_id}`,
-      this.httpOptions
-    );
-  }
 
-  countAllPacients () : Observable<number>
-  {
-    return this.http.get<number>(`${this.API_URL}/api/Pacient/count-pacients`,
-      this.httpOptions)
-  }
-  countProfissionalPacients () : Observable<number>
-  {
-    return this.http.get<number>(`${this.API_URL}/api/Pacient/count-profissional`,
-      this.httpOptions)
-  }
+
 }

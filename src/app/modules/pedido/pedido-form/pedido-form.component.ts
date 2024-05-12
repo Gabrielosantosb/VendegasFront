@@ -1,21 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
-
 import { FormBuilder, Validators} from "@angular/forms";
 import {DynamicDialogConfig} from "primeng/dynamicdialog";
-
 import {ProgressBarModule} from "primeng/progressbar";
-
-
 import {CookieService} from "ngx-cookie-service";
-import {ClipboardService} from "ngx-clipboard";
 import {ToastMessage} from "../../../services/toast-message/toast-message";
 import {PedidoEvent} from "../../../../models/interfaces/enums/pedido/PedidoEvent";
-import {EditClienteAction} from "../../../../models/interfaces/cliente/EditClienteAction";
 import {environments} from "../../../../environments/environments";
-import {ConfirmationModal} from "../../../services/confirmation/confirmation-service.service";
 import {EditPedidoAction} from "../../../../models/interfaces/pedido/PedidoAction";
-import {PedidoRequest} from "../../../../models/interfaces/pedido/PedidoRequest";
 import {PedidoService} from "../../../services/pedido/pedido.service";
 
 @Component({
@@ -33,12 +25,12 @@ export class PedidoFormComponent implements OnInit, OnDestroy {
   public editPedidoAction = PedidoEvent.EDIT_PEDIDO_EVENT;
   public pedidoAction !: { event: EditPedidoAction }
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
-  reportId = 0;
-  pacientId = 0
+  clienteId = 0;
+  empresaId = 0
   public pedidoForm = this.formBuilder.group({
     observacao: ['', Validators.required],
   })
-  private token = this.cookie.get(this.USER_AUTH)
+
 
 
 
@@ -56,7 +48,7 @@ export class PedidoFormComponent implements OnInit, OnDestroy {
     this.pedidoAction = this.ref.data;
     if(this.pedidoAction.event.empresaId  && this.pedidoAction.event.action == this.addPedidoAction)
     {
-      this.pacientId = this.pedidoAction.event.empresaId
+      this.empresaId = this.pedidoAction.event.empresaId
     }
 
     if(this.pedidoAction.event.action == this.editPedidoAction && this.pedidoAction.event.empresaId)
