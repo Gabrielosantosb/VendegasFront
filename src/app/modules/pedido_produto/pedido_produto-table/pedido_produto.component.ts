@@ -17,7 +17,7 @@ import {PedidoResponse} from "../../../../models/interfaces/pedido/PedidoRespons
 export class PedidoTableComponent implements OnInit{
   @Input() pedidos: Array<PedidoResponse> = [];
   @Output() clienteEvent = new EventEmitter<EventAction>()
-  @Output() pedidoEvent = new EventEmitter<EditPedidoAction>()
+  // @Output() pedidoEvent = new EventEmitter<EditPedidoAction>()
   @Output() lancarPedidoEvent = new EventEmitter<LancarPedidoAction>()
   @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
 
@@ -39,6 +39,7 @@ export class PedidoTableComponent implements OnInit{
 
 
   handleLancarPedido(pedidoId: number){
+    console.log('Emitiu id', pedidoId)
     if( pedidoId !== null){
       this.lancarPedidoEvent.emit({
         pedidoId,
@@ -47,17 +48,17 @@ export class PedidoTableComponent implements OnInit{
   }
 
 
-  handleAddPedido(action:string ,empresaId: number, clienteId: number, clienteNome: string){
-    if(empresaId !==null && clienteId !== null){
-      console.log(action, empresaId, clienteId, clienteNome)
-      this.pedidoEvent.emit({
-        action,
-        clienteId,
-        empresaId,
-        clienteNome,
-      })
-    }
-  }
+  // handleAddPedido(action:string ,empresaId: number, clienteId: number, clienteNome: string){
+  //   if(empresaId !==null && clienteId !== null){
+  //     console.log(action, empresaId, clienteId, clienteNome)
+  //     this.pedidoEvent.emit({
+  //       action,
+  //       clienteId,
+  //       empresaId,
+  //       clienteNome,
+  //     })
+  //   }
+  // }
 
 
 

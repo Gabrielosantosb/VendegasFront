@@ -13,7 +13,7 @@ import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ConfirmationModal} from "../../../../services/confirmation/confirmation-service.service";
 import {DeleteReportAction} from "../../../../../models/interfaces/reports/event/DeleteProductAction";
 import {ProdutoFormComponent} from "../../../produto/produto-form/produto-form.component";
-import {EditPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
+import {EditPedidoAction, LancarPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
 import {PedidoFormComponent} from "../../../pedido/pedido-form/pedido-form.component";
 import {PedidoService} from "../../../../services/pedido/pedido.service";
 import {PedidoResponse} from "../../../../../models/interfaces/pedido/PedidoResponse";
@@ -67,21 +67,18 @@ export class PedidoProdutoComponent implements OnDestroy, OnInit {
   }
 
 
-  handlePedidoAction(event :EditPedidoAction): void{
+  handlePedidoAction(event :LancarPedidoAction): void{
     console.log('Evento bateu' , event)
     if (event) {
       this.ref = this.dialogService.open(PedidoFormComponent, {
-        header: event?.action,
+        header: 'Lançar pedido',
         width: '70%',
         contentStyle: {overflow: 'auto'},
         baseZIndex: 10000,
         maximizable: true,
         data: {
           event:{
-            action : event.action,
-            empresaId: event.empresaId,
-            clienteId: event.clienteId,
-            clienteNome: event.clienteNome
+            pedidoId : event.pedidoId,
 
           }
         },
