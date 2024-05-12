@@ -33,7 +33,7 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
   public clienteAction !: { event: EditClienteAction }
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
   reportId = 0;
-  pacientId = 0
+  clienteId = 0
   public clienteForm = this.formBuilder.group({
 
     clienteName: ['', Validators.required],
@@ -48,27 +48,16 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
   constructor(
     public ref: DynamicDialogConfig,
     private formBuilder: FormBuilder,
-    private empresaService: EmpresaService,
+
     private clienteService: ReportsService,
-    private confirmationModal: ConfirmationModal,
+
     private toastMessage: ToastMessage,
     private cookie: CookieService,
-    private clipboardService: ClipboardService,
   ) {
   }
 
   ngOnInit(): void {
     this.clienteAction = this.ref.data;
-    if(this.clienteAction.event.id  && this.clienteAction.event.action == this.addClienteAction)
-    {
-      this.pacientId = this.clienteAction.event.id
-    }
-
-    if(this.clienteAction.event.action == this.editClientAction && this.clienteAction.event.id)
-    {
-      // this.loadReportData(this.clienteAction.event.id)
-
-    }
 
   }
   handleSubmitClienteAction(): void {

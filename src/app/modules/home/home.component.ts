@@ -65,7 +65,7 @@ export class HomeComponent implements OnDestroy {
               this.errorMessage = "";
               this.loginForm.reset();
               this.isLoading = false
-              this.router.navigate(["/dashboard"])
+              this.router.navigate(["/empresa"])
               this.toastMessage.SuccessMessage(`Seja bem vindo ${response.username}`)
             }
           }

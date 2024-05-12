@@ -19,7 +19,6 @@ import {ProdutoEvent} from "../../../../../models/interfaces/enums/produto/Produ
   styleUrls: ['./empresa-table.component.scss']
 })
 export class EmpresaTableComponent implements OnInit{
-  @Input() public pacients: Array<GetPacientsResponse> = [];
   @Input() public empresa: Array<GetEmpresaResponse> = [];
 
   @Output() public empresaEvent = new EventEmitter<EditEmpresaAction>();
@@ -36,22 +35,12 @@ export class EmpresaTableComponent implements OnInit{
 
 
 
-
-
-
-
-
-  constructor(private empresaService: EmpresaService, private toastMessage: ToastMessage, private referralService: ReferralService) {
+  constructor(private empresaService: EmpresaService) {
   }
 
   ngOnInit(): void {
         this.handleShowAllEmpresas()
     }
-
-
-
-
-
 
   handleEmpresaEvent(action: string, id?: number, empresaName?: string): void {
     if (action && action !== '') this.empresaEvent.emit({action, id, empresaName});
@@ -69,11 +58,10 @@ export class EmpresaTableComponent implements OnInit{
   handleShowAllEmpresas(): void {
     this.empresaService.getAllEmpresas().subscribe({
       next: (allEmpresaData) => {
-        console.log('Aqui as empresas: ', allEmpresaData)
         this.empresa = allEmpresaData;
       },
       error: (error) => {
-        console.error('Erro ao obter os pacientes do usuário:', error);
+        console.error('Erro ao obter empresas:', error);
       }
     });
   }

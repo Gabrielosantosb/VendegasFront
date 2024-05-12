@@ -15,12 +15,7 @@ const routes: Routes = [
     path : "home",
     component: HomeComponent,
   },
-  {
-    path : "dashboard",
-    loadChildren: ()=> import('./modules/dashboard/dashboard.module')
-      .then((m)=> m.DashboardModule),
-    canActivate:[AuthGuardService]
-  },
+
   {
     path : "empresa",
     loadChildren: ()=> import('./modules/empresa/empresa.module')

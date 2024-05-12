@@ -44,42 +44,6 @@ export class ReportsService {
   }
 
 
-  getAllReports(): Observable<Array<GetClienteResponse>> {
-    return this.http.get<Array<GetClienteResponse>>(`${this.API_URL}/api/Report/get-reports`, this.httpOptions)
-  }
-
-  // getReportByPacientId(pacientId: number, reportForm: FormGroup): Observable<GetClienteResponse> {
-  //   return this.http.get<GetClienteResponse>(`${this.API_URL}/api/Report/get-pacient-report/${pacientId}`, this.httpOptions).pipe(
-  //     tap((reportData: GetClienteResponse) =>{
-  //         reportForm.patchValue({
-  //           medicalHistory: reportData.medicalHistory || '',
-  //           currentMedications: reportData.currentMedications || '',
-  //           cardiovascularIssues: reportData.cardiovascularIssues || false,
-  //           diabetes: reportData.diabetes || false,
-  //           familyHistoryCardiovascularIssues: reportData.familyHistoryCardiovascularIssues || false,
-  //           familyHistoryDiabetes: reportData.familyHistoryDiabetes || false,
-  //           physicalActivity: reportData.physicalActivity || '',
-  //           smoker: reportData.smoker || false,
-  //           alcoholConsumption: reportData.alcoholConsumption || 0,
-  //           emergencyContactName: reportData.emergencyContactName || '',
-  //           emergencyContactPhone: reportData.emergencyContactPhone || '',
-  //           observations: reportData.observations || ''
-  //         })
-  //     })
-  //   )
-  // }
-
-  getReportById(reportId: number, reportForm: FormGroup): Observable<GetClienteResponse> {
-    return this.http.get<GetClienteResponse>(
-      `${this.API_URL}/api/Report/get-report/${reportId}`,
-      this.httpOptions
-    )
-  }
-  getReportId(pacientId: number): Observable<number> {
-    return this.http.get<number>(`${this.API_URL}/api/Report/get-pacient-report/${pacientId}`, this.httpOptions)
-  }
-
-
   deleteReport( reportId: number ): Observable<void>{
     return this.http.delete<void>(`${this.API_URL}/api/Report/delete-report/${reportId}`,
       this.httpOptions)
