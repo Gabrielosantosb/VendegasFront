@@ -37,6 +37,13 @@ export class ProdutoService {
       this.httpOptions
     );
   }
+  deleteProduto(produtoId: number): Observable<any> {
+    return this.http.delete<any>(
+      `${this.API_URL}/api/Produto/delete-produto/${produtoId}`,
+      this.httpOptions
+    );
+  }
+
 
 
 

@@ -111,12 +111,17 @@
             </td>
           </tr>
         </ng-template>
+
+        <!-- Template para quando não houver empresas -->
+        <ng-template pTemplate="noData">
+          <div class="text-center">Nenhuma empresa encontrada.</div>
+        </ng-template>
       </p-table>
 
 
 
       <ng-template #noEmpresas>
-        <div class="text-center">Nenhuma empresa encontrado.</div>
+        <div class="text-center">Nenhuma empresa encontrada.</div>
       </ng-template>
     </p-card>
   </div>

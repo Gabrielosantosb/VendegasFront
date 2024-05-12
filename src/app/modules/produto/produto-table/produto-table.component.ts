@@ -2,6 +2,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ProdutoResponse} from "../../../../models/interfaces/produto/response/ProdutoResponse";
 import {EventAction} from "../../../../models/interfaces/cliente/EventAction";
 import {ProdutoService} from "../../../services/produto/produto.service";
+import {ProdutoEvent} from "../../../../models/interfaces/enums/produto/ProdutoEvent";
+import {takeUntil} from "rxjs";
+import {ToastMessage} from "../../../services/toast-message/toast-message";
+import {ConfirmationService} from "primeng/api";
 
 
 
@@ -13,11 +17,11 @@ import {ProdutoService} from "../../../services/produto/produto.service";
 export class ProdutoTableComponent {
   @Input() produtos: Array<ProdutoResponse> = [];
   @Output() produtoEvent = new EventEmitter<EventAction>()
-
   public selectedProduto!: ProdutoResponse;
+  public deleteProdutoAction = ProdutoEvent.DELETE_PRODUTO_EVENT
 
 
-  constructor(private produtoService: ProdutoService) {
+  constructor(private produtoService: ProdutoService, private toastMessage: ToastMessage, private confirmationService: ConfirmationService) {
   }
 
 
@@ -31,8 +35,31 @@ export class ProdutoTableComponent {
       }
     });
   }
+  handleDeleteProduct(produtoId: number): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja excluir este produto?',
+      accept: () => {
+        console.log(produtoId);
+        if (produtoId == null) {
+          console.error('ID inválido');
+          return;
+        }
+        this.produtoService.deleteProduto(produtoId).pipe()
+          .subscribe({
+            next: (response) => {
+              this.toastMessage.InfoMessage("Produto removido com sucesso");
+              this.handleShowAllProdutos();
+            },
+            error: (err) => {
+              this.toastMessage.ErrorMessage("Erro ao remover produto");
+            }
+          });
+      }
+    });
+  }
 
   handleProdutoEvent(action: string, id?: number): void {
+    console.log(id)
     if (action && action !== '') this.produtoEvent.emit({action, id})
   }
 

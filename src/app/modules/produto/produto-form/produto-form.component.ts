@@ -10,6 +10,7 @@ import {EditProdutoAction} from "../../../../models/interfaces/produto/EditProdu
 import {environments} from "../../../../environments/environments";
 import {ProdutoRequest} from "../../../../models/interfaces/produto/request/ProdutoRequest";
 import {ProdutoService} from "../../../services/produto/produto.service";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-cliente-form',
@@ -73,6 +74,22 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
     console.log('Editar produto:', requestUpdateForm);
   }
 
+
+  handleSubmitRemoveProduto(produtoId: number):void{
+    if (produtoId == null){
+      console.error('ID  inválido');
+      return
+    }
+    this.produtoService.deleteProduto(produtoId).pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next:(response) =>{
+          this.toastMessage.InfoMessage("Produto removido com sucesso")
+        },
+        error:( err) =>{
+          this.toastMessage.ErrorMessage("Erro ao remover produto")
+        }
+      })
+  }
   handleSubmitAddProduto(): void {
     var empresaId  = this.produtoAction?.event?.id
     console.log('id da empresa:', empresaId)

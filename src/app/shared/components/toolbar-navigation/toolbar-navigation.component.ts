@@ -16,6 +16,7 @@ export class ToolbarNavigationComponent {
               private cookie : CookieService,   ) {
   }
 
+
   logout(): void {
     console.log('clicou')
     this.confirmationModal.confirmLogout("Tem certeza que deseja sair?")
