@@ -12,6 +12,8 @@ import {EditClienteAction} from "../../../../models/interfaces/reports/event/Edi
 import {environments} from "../../../../environments/environments";
 import {FormBuilder, Validators} from "@angular/forms";
 import {DynamicDialogConfig} from "primeng/dynamicdialog";
+import {ProdutoService} from "../../../services/produto/produto.service";
+import {ProdutoResponse} from "../../../../models/interfaces/produto/response/ProdutoResponse";
 
 @Component({
   selector: 'app-cliente-form',
@@ -23,12 +25,12 @@ export class PedidoProdutoFormComponent implements OnInit, OnDestroy {
   private readonly destroy$: Subject<void> = new Subject();
   isLoading = false
   loadingMode: ProgressBarModule = 'indeterminate';
-
+  produtos: Array<ProdutoResponse> = [];
   public clienteAction !: { event: EditClienteAction }
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
-  reportId = 0;
+
   public lancarPedidoForm = this.formBuilder.group({
-    quantidade: [0, Validators.required],
+    quantidade: [0, [Validators.required, Validators.min(1)]],
     produto: ['', Validators.required],
 
   })
@@ -39,7 +41,7 @@ export class PedidoProdutoFormComponent implements OnInit, OnDestroy {
   constructor(
     public ref: DynamicDialogConfig,
     private formBuilder: FormBuilder,
-
+    private produtoService: ProdutoService,
     private toastMessage: ToastMessage,
     private cookie: CookieService,
     private clipboardService: ClipboardService,
@@ -48,9 +50,18 @@ export class PedidoProdutoFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.clienteAction = this.ref.data;
+  }
 
-
-
+  getAllProdutos(): void {
+    this.produtoService.getAllProdutos().subscribe({
+      next: (allProdutosData) => {
+        this.produtos = allProdutosData;
+        console.log(this.produtos)
+      },
+      error: (error) => {
+        console.error('Erro ao obter produtos:', error);
+      }
+    });
   }
   handleSubmitClienteAction(): void {
     // if (this.clienteAction?.event?.action === this.editClientAction) this.handleSubmitEditCliente()
@@ -58,28 +69,7 @@ export class PedidoProdutoFormComponent implements OnInit, OnDestroy {
   }
 
 
-  handleSubmitEditCliente(): void {
-    if (this.reportId <= 0) {
-      console.error('ID do relatório inválido');
-      return;
-    }
-    // const requestUpdateForm = this.clienteForm.value as ClienteRequest;
-    // console.log('Editar relatório:', requestUpdateForm);
-    //
-    // this.clienteService.editReport(this.reportId, requestUpdateForm)
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe({
-    //     next: () => {
-    //       this.clienteForm.reset();
-    //       this.toastMessage.SuccessMessage('Ficha editada com sucesso!');
-    //     },
-    //     error: (err) => {
-    //       console.error(err);
-    //       this.clienteForm.reset();
-    //       this.toastMessage.ErrorMessage('Erro ao editar ficha');
-    //     }
-    //   });
-  }
+
 
   handleSubmitAddCliente(): void {
     var empresaId  = this.clienteAction?.event?.id
