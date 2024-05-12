@@ -28,10 +28,8 @@ export class PedidoProdutoFormComponent implements OnInit, OnDestroy {
   private readonly USER_AUTH = environments.COOKIES_VALUE.user_auth
   reportId = 0;
   public lancarPedidoForm = this.formBuilder.group({
-
     quantidade: [0, Validators.required],
     produto: ['', Validators.required],
-
 
   })
   private token = this.cookie.get(this.USER_AUTH)

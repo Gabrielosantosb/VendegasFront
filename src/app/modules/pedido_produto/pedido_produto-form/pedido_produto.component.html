@@ -3,7 +3,12 @@
     <div style="margin-bottom: 15px; text-align: center;">
 
     <div class="card flex flex-column md:flex-column gap-3">
-      <textarea pInputText placeholder="Quantidade" formControlName="quantidade"></textarea>
+      <input pInputText type="number" placeholder="Quantidade" formControlName="quantidade"/>
+      <p-dropdown formControlName="produto"
+                  placeholder="Selecione um produto"
+                  optionLabel="nome"
+                  [style]="{'width': '100%', 'height': '40px'}"
+                  [required] = "true"></p-dropdown>
       <textarea pInputText placeholder="Produto" formControlName="produto"></textarea>
 
 
