@@ -17,6 +17,7 @@ import {EditPedidoAction, LancarPedidoAction} from "../../../../../models/interf
 import {PedidoFormComponent} from "../../../pedido/pedido-form/pedido-form.component";
 import {PedidoService} from "../../../../services/pedido/pedido.service";
 import {PedidoResponse} from "../../../../../models/interfaces/pedido/PedidoResponse";
+import {PedidoProdutoFormComponent} from "../../pedido_produto-form/pedido_produto-form.component";
 
 
 @Component({
@@ -70,7 +71,7 @@ export class PedidoProdutoComponent implements OnDestroy, OnInit {
   handlePedidoAction(event :LancarPedidoAction): void{
     console.log('Evento bateu' , event)
     if (event) {
-      this.ref = this.dialogService.open(PedidoFormComponent, {
+      this.ref = this.dialogService.open(PedidoProdutoFormComponent, {
         header: 'Lançar pedido',
         width: '70%',
         contentStyle: {overflow: 'auto'},

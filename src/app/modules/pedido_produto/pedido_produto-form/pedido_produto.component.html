@@ -1,0 +1,21 @@
+<div>
+  <form [formGroup]="lancarPedidoForm" (ngSubmit)="handleSubmitClienteAction()">
+    <div style="margin-bottom: 15px; text-align: center;">
+
+    <div class="card flex flex-column md:flex-column gap-3">
+      <textarea pInputText placeholder="Quantidade" formControlName="quantidade"></textarea>
+      <textarea pInputText placeholder="Produto" formControlName="produto"></textarea>
+
+
+        <p-button
+          [disabled]="!lancarPedidoForm.valid"
+          type="submit"
+          label="Concluir"
+        ></p-button>
+      </div>
+
+  </div>
+  </form>
+</div>
+
+

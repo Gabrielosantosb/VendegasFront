@@ -20,12 +20,14 @@ import {FileUploadModule} from "primeng/fileupload";
 import {TooltipModule} from "primeng/tooltip";
 import {ProdutoFormComponent} from "../modules/produto/produto-form/produto-form.component";
 import {PedidoFormComponent} from "../modules/pedido/pedido-form/pedido-form.component";
+import {PedidoProdutoFormComponent} from "../modules/pedido_produto/pedido_produto-form/pedido_produto-form.component";
 @NgModule({
   declarations: [
     ToolbarNavigationComponent,
     ClienteFormComponent,
     ProdutoFormComponent,
     PedidoFormComponent,
+    PedidoProdutoFormComponent,
     ShortenPipe,
   ],
   imports: [

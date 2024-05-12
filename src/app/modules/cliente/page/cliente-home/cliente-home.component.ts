@@ -74,7 +74,6 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
         maximizable: true,
         data: {
           event: event,
-          // productDatas: this.productsDatas,
         },
       });
       this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
