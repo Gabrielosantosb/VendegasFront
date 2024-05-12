@@ -43,10 +43,11 @@ export class EmpresaService {
 
 
 
-  createEmpresa(userId: 1, requestData : AddEmpresaRequest): Observable<Array<GetEmpresaResponse>> {
+  createEmpresa(requestData : AddEmpresaRequest): Observable<Array<GetEmpresaResponse>> {
       console.log('Request:', requestData)
+    var userIDD = 1
     return this.http.post<Array<GetEmpresaResponse>>(
-      `${this.API_URL}/api/Empresa/create-empresa/${userId}`,
+      `${this.API_URL}/api/Empresa/create-empresa`,
       requestData,
       this.httpOptions
     );
