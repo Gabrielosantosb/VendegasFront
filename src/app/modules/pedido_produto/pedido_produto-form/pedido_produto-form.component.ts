@@ -8,7 +8,7 @@ import {CookieService} from "ngx-cookie-service";
 import {ClipboardService} from "ngx-clipboard";
 import {ToastMessage} from "../../../services/toast-message/toast-message";
 import {ProgressBarModule} from "primeng/progressbar";
-import {EditClienteAction} from "../../../../models/interfaces/reports/event/EditClienteAction";
+import {EditClienteAction} from "../../../../models/interfaces/cliente/EditClienteAction";
 import {environments} from "../../../../environments/environments";
 import {FormBuilder, Validators} from "@angular/forms";
 import {DynamicDialogConfig} from "primeng/dynamicdialog";

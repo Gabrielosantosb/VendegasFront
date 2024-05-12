@@ -1,20 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
 import {ReportsService} from "../../../../services/reports/reports.service";
-import {ReportsDataTransferService} from "../../../../shared/reports/reports-data-transfer.service";
-import {Router} from "@angular/router";
-import {
-  GetAllProductsResponse, GetClienteResponse,
-} from "../../../../../models/interfaces/reports/response/GetAllProductsResponse";
-import {ConfirmationService} from "primeng/api";
-import {EventAction} from "../../../../../models/interfaces/reports/event/EventAction";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ConfirmationModal} from "../../../../services/confirmation/confirmation-service.service";
-import {DeleteReportAction} from "../../../../../models/interfaces/reports/event/DeleteProductAction";
-import {ProdutoFormComponent} from "../../../produto/produto-form/produto-form.component";
-import {EditPedidoAction, LancarPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
-import {PedidoFormComponent} from "../../../pedido/pedido-form/pedido-form.component";
+import {LancarPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
 import {PedidoService} from "../../../../services/pedido/pedido.service";
 import {PedidoResponse} from "../../../../../models/interfaces/pedido/PedidoResponse";
 import {PedidoProdutoFormComponent} from "../../pedido_produto-form/pedido_produto-form.component";
@@ -91,35 +81,8 @@ export class PedidoProdutoComponent implements OnDestroy, OnInit {
     }
   }
 
-  handleDeleteClienteAction(event: DeleteReportAction): void {
-    console.log('ReportId', event?.reportId);
-    if (event) {
-      this.confirmationModal.confirmDelete(`Confirma a exclusão ?`, () => {
-        this.deleteCliente(event?.reportId);
-      });
-    } else {
-      this.toastMessage.ErrorMessage(`Não é possível excluir a ficha.`);
 
-    }
-  }
-  deleteCliente(reportId: number) {
-    console.log(reportId)
-    if (reportId) {
-      this.reportService
-        .deleteReport(reportId)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: () => {
-              this.getAllPedidos()
-              this.toastMessage.SuccessMessage('Cliente removido com sucesso!')
-          },
-          error: (err) => {
-            console.log(err);
-            this.toastMessage.ErrorMessage('Erro ao remover cliente!')
-          },
-        });
-    }
-  }
+
 
   ngOnDestroy(): void {
     this.destroy$.next();

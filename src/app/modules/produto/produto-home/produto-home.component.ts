@@ -8,7 +8,7 @@ import {ToastMessage} from "../../../services/toast-message/toast-message";
 import {ConfirmationModal} from "../../../services/confirmation/confirmation-service.service";
 import {ProdutoResponse} from "../../../../models/interfaces/produto/response/ProdutoResponse";
 import {ProdutoService} from "../../../services/produto/produto.service";
-import {EventAction} from "../../../../models/interfaces/reports/event/EventAction";
+import {EventAction} from "../../../../models/interfaces/cliente/EventAction";
 import {ClienteFormComponent} from "../../cliente/components/cliente-form/cliente-form.component";
 import {ProdutoFormComponent} from "../produto-form/produto-form.component";
 

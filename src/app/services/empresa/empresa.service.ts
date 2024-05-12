@@ -6,9 +6,8 @@ import {Observable, tap} from "rxjs";
 import {
   AddEmpresaRequest, EditEmpresaRequest,
   GetEmpresaResponse,
-  GetPacientsResponse, SendMedicalSpecialityRequest,
 
-} from "../../../models/interfaces/pacients/get-pacient-service.service";
+} from "../../../models/interfaces/empresa/EmpresaModel";
 import {FormGroup} from "@angular/forms";
 
 @Injectable({
@@ -44,14 +43,7 @@ export class EmpresaService {
     );
   }
 
-  sendMedicalSpeciality(pacientId: number, medicalSpeciality: string): Observable<SendMedicalSpecialityRequest> {
-    const body = { medicalSpeciality };
-    return this.http.post<SendMedicalSpecialityRequest>(
-      `${this.API_URL}/api/Pacient/pacient-medical-speciality/${pacientId}`,
-      body,
-      this.httpOptions
-    );
-  }
+
 
   createEmpresa(userId: 1, requestData : AddEmpresaRequest): Observable<Array<GetEmpresaResponse>> {
       console.log('Request:', requestData)

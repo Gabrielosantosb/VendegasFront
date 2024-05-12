@@ -1,17 +1,13 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {
-  GetAllProductsResponse,
-  GetClienteResponse
-} from "../../../../../models/interfaces/reports/response/GetAllProductsResponse";
-import {EventAction} from "../../../../../models/interfaces/reports/event/EventAction";
-import {
-  DeleteReportAction
-} from "../../../../../models/interfaces/reports/event/DeleteProductAction";
+
+
 import {ReportsService} from "../../../../services/reports/reports.service";
 import {EditPedidoAction} from "../../../../../models/interfaces/pedido/PedidoAction";
 import {ClienteEvent} from "../../../../../models/interfaces/enums/cliente/ClienteEvent";
 import {ProdutoEvent} from "../../../../../models/interfaces/enums/produto/ProdutoEvent";
 import {PedidoEvent} from "../../../../../models/interfaces/enums/pedido/PedidoEvent";
+import {EditClienteAction} from "../../../../../models/interfaces/cliente/EditClienteAction";
+import {GetClienteResponse} from "../../../../../models/interfaces/cliente/response/Cliente";
 
 
 @Component({
@@ -21,28 +17,16 @@ import {PedidoEvent} from "../../../../../models/interfaces/enums/pedido/PedidoE
 })
 export class ClienteTableComponent {
   @Input() clientes: Array<GetClienteResponse> = [];
-  @Output() clienteEvent = new EventEmitter<EventAction>()
+  @Output() clienteEvent = new EventEmitter<EditClienteAction>()
   @Output() pedidoEvent = new EventEmitter<EditPedidoAction>()
-  @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
+
 
 
 
 
   public addPedidoAction = PedidoEvent.ADD_PEDIDO_EVENT
-  showProfissionalReports = false
   public selectedCliente!: GetClienteResponse;
-  displayModal: boolean = false;
 
-  constructor(private reportService: ReportsService) {
-  }
-
-
-
-
-  openReportDetails(report: GetClienteResponse) {
-    this.selectedCliente = report;
-    this.displayModal = true;
-  }
 
   handleAddPedido(action:string ,empresaId: number, clienteId: number, clienteNome: string){
     if(empresaId !==null && clienteId !== null){
@@ -56,12 +40,12 @@ export class ClienteTableComponent {
     }
   }
 
-  handleDeleteCliente(reportId: number, pacientName: string): void {
-    if(reportId !== null && pacientName !== "")
+  handleEditCliente(action:string ,id: number,): void {
+    if(id !== null && action !== "")
     {
-      this.deleteClienteEvent.emit({
-        reportId,
-        pacientName,
+      this.clienteEvent.emit({
+        action,
+        id,
       })
     }
   }

@@ -3,11 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {environments} from "../../../environments/environments";
 import {map, Observable, tap} from "rxjs";
-import {
-  GetClienteResponse, ClienteRequest
-} from "../../../models/interfaces/reports/response/GetAllProductsResponse";
-import {DeleteProductResponse} from "../../../models/interfaces/reports/response/DeleteProductResponse";
 import {FormGroup} from "@angular/forms";
+import {ClienteRequest, GetClienteResponse} from "../../../models/interfaces/cliente/response/Cliente";
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +38,19 @@ export class ReportsService {
   }
   getAllClientes(): Observable<Array<GetClienteResponse>> {
     return this.http.get<Array<GetClienteResponse>>(`${this.API_URL}/api/Cliente/get-all-clientes`, this.httpOptions)
+  }
+
+
+
+
+  getReportById(reportId: number, reportForm: FormGroup): Observable<GetClienteResponse> {
+    return this.http.get<GetClienteResponse>(
+      `${this.API_URL}/api/Report/get-report/${reportId}`,
+      this.httpOptions
+    )
+  }
+  getReportId(pacientId: number): Observable<number> {
+    return this.http.get<number>(`${this.API_URL}/api/Report/get-pacient-report/${pacientId}`, this.httpOptions)
   }
 
 

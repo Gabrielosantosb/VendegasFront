@@ -66,7 +66,7 @@ export class ProdutoFormComponent implements OnInit, OnDestroy {
 
     if(this.produtoAction.event.action == this.editProdutoAction && this.produtoAction.event.id)
     {
-      // this.loadReportData(this.clienteAction.event.id)
+      // this.loadReportData(this.clienteAction.empresa.id)
 
     }
 

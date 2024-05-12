@@ -5,11 +5,11 @@ import {Subject, takeUntil} from "rxjs";
 import {
   GetEmpresaResponse,
 
-} from "../../../../../models/interfaces/pacients/get-pacient-service.service";
+} from "../../../../../models/interfaces/empresa/EmpresaModel";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {Router} from "@angular/router";
 import {ConfirmationModal} from "../../../../services/confirmation/confirmation-service.service";
-import {EventAction} from "../../../../../models/interfaces/reports/event/EventAction";
+import {EventAction} from "../../../../../models/interfaces/cliente/EventAction";
 import {EmpresaFormComponent} from "../../components/empresa-form/empresa-form/empresa-form.component";
 
 import {ProgressBarModule} from "primeng/progressbar";

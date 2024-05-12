@@ -1,12 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
   GetEmpresaResponse,
-  GetPacientsResponse
-} from "../../../../../models/interfaces/pacients/get-pacient-service.service";
-import {EditEmpresaAction} from "../../../../../models/interfaces/pacients/event/editPacient";
-import {EmpresaEvent} from "../../../../../models/interfaces/enums/pacients/PacientEvent";
+} from "../../../../../models/interfaces/empresa/EmpresaModel";
+import {EditEmpresaAction} from "../../../../../models/interfaces/enums/empresa/EmpresaAction";
+import {EmpresaEvent} from "../../../../../models/interfaces/enums/empresa/EmpresaEvent";
 import {EmpresaService} from "../../../../services/empresa/empresa.service";
-import {EditClienteAction} from "../../../../../models/interfaces/reports/event/EditClienteAction";
+import {EditClienteAction} from "../../../../../models/interfaces/cliente/EditClienteAction";
 import {ToastMessage} from "../../../../services/toast-message/toast-message";
 import {ReferralService} from "../../../../services/referral/referral.service";
 import {ClienteEvent} from "../../../../../models/interfaces/enums/cliente/ClienteEvent";

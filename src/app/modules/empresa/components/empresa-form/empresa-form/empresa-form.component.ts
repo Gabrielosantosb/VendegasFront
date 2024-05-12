@@ -2,8 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
 import {DynamicDialogConfig} from "primeng/dynamicdialog";
 import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
-import {EmpresaEvent} from "../../../../../../models/interfaces/enums/pacients/PacientEvent";
-import {EditEmpresaAction} from "../../../../../../models/interfaces/pacients/event/editPacient";
+import {EmpresaEvent} from "../../../../../../models/interfaces/enums/empresa/EmpresaEvent";
+import {EditEmpresaAction} from "../../../../../../models/interfaces/enums/empresa/EmpresaAction";
 import {ToastMessage} from "../../../../../services/toast-message/toast-message";
 import {ConfirmationModal} from "../../../../../services/confirmation/confirmation-service.service";
 import {EmpresaService} from "../../../../../services/empresa/empresa.service";
@@ -11,7 +11,7 @@ import {ProgressBar, ProgressBarModule} from "primeng/progressbar";
 import {
   AddEmpresaRequest,
   EditEmpresaRequest, GetEmpresaResponse,
-} from "../../../../../../models/interfaces/pacients/get-pacient-service.service";
+} from "../../../../../../models/interfaces/empresa/EmpresaModel";
 
 @Component({
   selector: 'app-empresa-form',

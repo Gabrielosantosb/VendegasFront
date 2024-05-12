@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {GetClienteResponse} from "../../../../models/interfaces/reports/response/GetAllProductsResponse";
-import {EventAction} from "../../../../models/interfaces/reports/event/EventAction";
+
+import {EventAction} from "../../../../models/interfaces/cliente/EventAction";
 import {EditPedidoAction, LancarPedidoAction} from "../../../../models/interfaces/pedido/PedidoAction";
-import {DeleteReportAction} from "../../../../models/interfaces/reports/event/DeleteProductAction";
 import {PedidoEvent} from "../../../../models/interfaces/enums/pedido/PedidoEvent";
 import {ReportsService} from "../../../services/reports/reports.service";
 import {PedidoResponse} from "../../../../models/interfaces/pedido/PedidoResponse";
 import {PedidoService} from "../../../services/pedido/pedido.service";
+import {GetClienteResponse} from "../../../../models/interfaces/cliente/response/Cliente";
 
 
 
@@ -20,7 +20,6 @@ export class PedidoTableComponent implements OnInit{
   @Output() clienteEvent = new EventEmitter<EventAction>()
 
   @Output() lancarPedidoEvent = new EventEmitter<LancarPedidoAction>()
-  @Output() deleteClienteEvent = new EventEmitter<DeleteReportAction>()
 
 
   public selectedPedido!: GetClienteResponse;

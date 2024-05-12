@@ -11,7 +11,7 @@ import {CookieService} from "ngx-cookie-service";
 import {ClipboardService} from "ngx-clipboard";
 import {ToastMessage} from "../../../services/toast-message/toast-message";
 import {PedidoEvent} from "../../../../models/interfaces/enums/pedido/PedidoEvent";
-import {EditClienteAction} from "../../../../models/interfaces/reports/event/EditClienteAction";
+import {EditClienteAction} from "../../../../models/interfaces/cliente/EditClienteAction";
 import {environments} from "../../../../environments/environments";
 import {ConfirmationModal} from "../../../services/confirmation/confirmation-service.service";
 import {EditPedidoAction} from "../../../../models/interfaces/pedido/PedidoAction";
@@ -61,7 +61,7 @@ export class PedidoFormComponent implements OnInit, OnDestroy {
 
     if(this.pedidoAction.event.action == this.editPedidoAction && this.pedidoAction.event.empresaId)
     {
-      // this.loadReportData(this.clienteAction.event.id)
+      // this.loadReportData(this.clienteAction.empresa.id)
 
     }
 

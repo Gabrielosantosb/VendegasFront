@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ProdutoResponse} from "../../../../models/interfaces/produto/response/ProdutoResponse";
-import {EventAction} from "../../../../models/interfaces/reports/event/EventAction";
+import {EventAction} from "../../../../models/interfaces/cliente/EventAction";
 import {ProdutoService} from "../../../services/produto/produto.service";
 
 
