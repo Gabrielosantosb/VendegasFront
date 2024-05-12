@@ -1,28 +1,32 @@
-n# ControleEstoque
+## Controle de Estoque e Lançamento de Pedidos VenderGas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+Este projeto é um sistema de controle de estoque e lançamento de pedidos desenvolvido em Angular 16, utilizando o PrimeNG.
 
-## Development server
+### Fluxo do Projeto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-Para rodar o projeto é necessário rodar a api
+1. **Login:** Os usuários podem fazer login para acessar o sistema.
+2. **Tela de Empresa:** Nesta tela, é possível criar clientes e produtos.
+3. **Tela de Cliente:** Os usuários podem fazer requisições de pedidos para os clientes cadastrados.
+4. **Tela de Pedidos:** Nesta tela, é possível lançar os pedidos requisitados.
 
-## Code scaffolding
+### Tecnologias Utilizadas
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Angular 16
+- PrimeNG
 
-## Build
+### Requisitos
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Angular CLI
+- .NET 6 SDK
+- Back-end em funcionamento
 
-## Running unit tests
+### Instalação
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para instalar as dependências do projeto, execute um dos seguintes comandos, dependendo do gerenciador de pacotes que você está utilizando:
 
-## Running end-to-end tests
+```bash
+# Utilizando npm
+npm install
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Utilizando yarn
+yarn install
