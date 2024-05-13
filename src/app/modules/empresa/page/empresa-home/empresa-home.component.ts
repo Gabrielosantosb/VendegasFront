@@ -59,7 +59,7 @@ export class EmpresaHomeComponent implements OnInit, OnDestroy {
           console.log(err);
           this.isLoading = false
           this.toastMessage.ErrorMessage('Erro ao buscar Empresas!')
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/empresa']);
         },
       });
   }
