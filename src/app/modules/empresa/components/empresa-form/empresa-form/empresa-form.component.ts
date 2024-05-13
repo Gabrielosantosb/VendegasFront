@@ -102,6 +102,7 @@ export class EmpresaFormComponent implements OnInit, OnDestroy {
           error: (err: Error) => {
             console.log(err);
             this.empresaForm.reset();
+            this.isLoading = false
             this.toastMessage.ErrorMessage('Erro ao criar empresa!')
           },
         });

@@ -54,6 +54,7 @@ export class ClienteHomeComponent implements OnDestroy, OnInit {
         },
         error:(err:Error) =>{
           console.log(err)
+          this.isLoading = false
           this.toastMessage.ErrorMessage("Erro ao buscar clientes")
         }
       })
